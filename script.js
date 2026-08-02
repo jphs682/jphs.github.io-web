@@ -1,48 +1,184 @@
-const lista = document.getElementById("lista-livros");
+// ===============================
+// Lista de livros
+// ===============================
 
-const botao = document.getElementById("adicionar");
+const livros = [];
 
-botao.addEventListener("click", () => {
+// ===============================
+// Elementos da página
+// ===============================
 
-    const titulo = document.getElementById("titulo").value;
+const listaLivros = document.getElementById("lista-livros");
+const ultimosLivros = document.getElementById("ultimos-livros");
 
-    const autor = document.getElementById("autor").value;
+const inputTitulo = document.getElementById("titulo");
+const inputAutor = document.getElementById("autor");
+const inputImagem = document.getElementById("imagem");
+const inputFrase = document.getElementById("frase");
 
-    const imagem = document.getElementById("imagem").value;
+const btnAdicionar = document.getElementById("adicionar");
 
-    const frase = document.getElementById("frase").value;
+// ===============================
+// Adicionar livro
+// ===============================
 
-    if(
-        titulo === "" ||
-        autor === "" ||
-        imagem === "" ||
-        frase === ""
-    ){
+btnAdicionar.addEventListener("click", adicionarLivro);
+
+function adicionarLivro() {
+
+    const titulo = inputTitulo.value.trim();
+    const autor = inputAutor.value.trim();
+    const imagem = inputImagem.value.trim();
+    const frase = inputFrase.value.trim();
+
+    if (!titulo || !autor || !imagem || !frase) {
+
         alert("Preencha todos os campos!");
+
         return;
+
     }
 
-    const livro = document.createElement("section");
+    const livro = {
 
-    livro.className = "livro";
+        titulo,
+        autor,
+        imagem,
+        frase
 
-    livro.innerHTML = `
-        <figure>
-            <img src="${imagem}" alt="${titulo}">
-            <figcaption>${autor}</figcaption>
-        </figure>
+    };
 
-        <div>
-            <h2>${titulo}</h2>
-            <p>${frase}</p>
-        </div>
-    `;
+    livros.push(livro);
 
-    lista.appendChild(livro);
+    atualizarPagina();
 
-    document.getElementById("titulo").value = "";
-    document.getElementById("autor").value = "";
-    document.getElementById("imagem").value = "";
-    document.getElementById("frase").value = "";
+    limparFormulario();
 
-});
+}
+
+// ===============================
+// Atualizar página
+// ===============================
+
+function atualizarPagina() {
+
+    atualizarListaLivros();
+
+    atualizarSidebar();
+
+}
+
+// ===============================
+// Mostrar livros
+// ===============================
+
+function atualizarListaLivros() {
+
+    listaLivros.innerHTML = "";
+
+    livros.forEach((livro) => {
+
+        const artigo = document.createElement("article");
+
+        artigo.className = "livro";
+
+        artigo.innerHTML = `
+        
+            <figure>
+
+                <img src="${livro.imagem}" alt="${livro.titulo}">
+
+                <figcaption>${livro.autor}</figcaption>
+
+            </figure>
+
+            <div>
+
+                <h2>${livro.titulo}</h2>
+
+                <p>${livro.frase}</p>
+
+            </div>
+
+        `;
+
+        listaLivros.appendChild(artigo);
+
+    });
+
+}
+
+// ===============================
+// Atualizar Sidebar
+// ===============================
+
+function atualizarSidebar() {
+
+    document.getElementById("total-livros").textContent = livros.length;
+
+    ultimosLivros.innerHTML = "";
+
+    const ultimos = livros.slice(-5).reverse();
+
+    ultimos.forEach((livro) => {
+
+        const li = document.createElement("li");
+
+        li.textContent = livro.titulo;
+
+        ultimosLivros.appendChild(li);
+
+    });
+
+    atualizarAutorMaisLido();
+
+}
+
+// ===============================
+// Autor mais lido
+// ===============================
+
+function atualizarAutorMaisLido() {
+
+    const contador = {};
+
+    livros.forEach((livro) => {
+
+        contador[livro.autor] = (contador[livro.autor] || 0) + 1;
+
+    });
+
+    let maior = 0;
+    let autor = "-";
+
+    for (const nome in contador) {
+
+        if (contador[nome] > maior) {
+
+            maior = contador[nome];
+
+            autor = nome;
+
+        }
+
+    }
+
+    document.getElementById("autor-mais-lido").textContent = autor;
+
+    document.getElementById("total-autores").textContent =
+        Object.keys(contador).length;
+
+}
+
+// ===============================
+// Limpar formulário
+// ===============================
+
+function limparFormulario() {
+
+    inputTitulo.value = "";
+    inputAutor.value = "";
+    inputImagem.value = "";
+    inputFrase.value = "";
+
+}
