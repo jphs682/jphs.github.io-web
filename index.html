@@ -1,153 +1,162 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-  <head>
+<html lang="pt-BR">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meu Top Livros</title>
+
     <link rel="stylesheet" href="style.css">
-  </head>
+</head>
 
-  <body>
+<body>
+
+    <!-- MENU -->
+
     <nav class="menu">
-      <div class="logo">
-        📚 Meu Top Livros
-      </div>
 
-      <ul>
-        <li><a href="#">Início</a></li>
-        <li><a href="#">Livros</a></li>
-        <li><a href="#">Autores</a></li>
-        <li><a href="#">Favoritos</a></li>
-        <li><a href="#">Contato</a></li>
-      </ul>
+        <div class="logo">
+            📚 Meu Top Livros
+        </div>
+
+        <ul>
+
+            <li><a href="#">Início</a></li>
+            <li><a href="#">Livros</a></li>
+            <li><a href="#">Autores</a></li>
+            <li><a href="#">Favoritos</a></li>
+            <li><a href="#">Contato</a></li>
+
+        </ul>
+
     </nav>
-    <header>
-      <h1>Meu Top Livros</h1>
 
-      <p class="descricao">
-        Os livros que mais marcaram minha vida.
-      </p>
+    <!-- CABEÇALHO -->
+
+    <header>
+
+        <h1>Meu Top Livros</h1>
+
+        <p class="descricao">
+            Os livros que mais marcaram minha vida.
+        </p>
+
     </header>
+
+    <!-- CONTEÚDO -->
+
     <main class="container">
 
-      <!-- Conteúdo principal -->
-      <section class="conteudo">
+        <section class="conteudo">
 
-        <article class="livro">
+            <!-- Formulário -->
 
-          <figure>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRl0ojqoRzmisD-qSrYzxYlmKDc_uwGJLLNUHIPdXYCww&s"
-              alt="A Sombra do Vento">
+            <section class="formulario">
 
-            <figcaption>Carlos Ruiz Zafón</figcaption>
-          </figure>
+                <h2>Adicionar Livro</h2>
 
-          <div>
+                <input
+                    type="text"
+                    id="titulo"
+                    placeholder="Título do livro">
 
-            <h2>A Sombra do Vento</h2>
+                <input
+                    type="text"
+                    id="autor"
+                    placeholder="Autor">
 
-            <p>
-              "Cresci no meio de livros, fazendo amigos invisíveis em páginas que se desfaziam em pó..."
-            </p>
+                <input
+                    type="text"
+                    id="imagem"
+                    placeholder="URL da capa">
 
-          </div>
+                <textarea
+                    id="frase"
+                    placeholder="Frase marcante"></textarea>
 
-        </article>
+                <button id="adicionar">
+                    Adicionar Livro
+                </button>
 
-        <article class="livro">
+            </section>
 
-          <figure>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw5gsm1SyWhOe64HRQV-95J110N8QmnVJjhS1RGpzAJQ&s=10"
-              alt="O Jogo do Anjo">
+            <!-- Lista dos livros -->
 
-            <figcaption>Carlos Ruiz Zafón</figcaption>
-          </figure>
+            <section id="lista-livros">
 
-          <div>
+                <!--
+                    Os livros serão adicionados
+                    automaticamente pelo JavaScript.
+                -->
 
-            <h2>O Jogo do Anjo</h2>
+            </section>
 
-            <p>
-              "A letra da canção é o que julgamos entender..."
-            </p>
+        </section>
 
-          </div>
+        <!-- SIDEBAR -->
 
-        </article>
+        <aside class="sidebar">
 
-        <article class="livro">
+            <h2>🔍 Pesquisa</h2>
 
-          <figure>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRCfm_sTPt8P8wNqclbmxdLpyc6TXs1fWrxeul1AFvDg&s=10"
-              alt="O Prisioneiro do Céu">
+            <input
+                type="search"
+                placeholder="Pesquisar livro...">
 
-            <figcaption>Carlos Ruiz Zafón</figcaption>
-          </figure>
+            <div class="box">
 
-          <div>
+                <h3>📚 Últimos Livros</h3>
 
-            <h2>O Prisioneiro do Céu</h2>
+                <ul>
 
-            <p>
-              "Na altura em que a razão é capaz de compreender..."
-            </p>
+                    <li>Cidade de Ladrões</li>
+                    <li>O Conde de Monte Cristo</li>
+                    <li>O Labirinto dos Espíritos</li>
 
-          </div>
+                </ul>
 
-        </article>
+            </div>
 
-      </section>
+            <div class="box">
 
-      <!-- Barra lateral -->
+                <h3>⭐ Favorito</h3>
 
-      <aside class="sidebar">
+                <p>A Sombra do Vento</p>
 
-        <h2>🔍 Pesquisa</h2>
+            </div>
 
-        <input
-          type="text"
-          placeholder="Pesquisar livro...">
+            <div class="box">
 
-        <div class="box">
+                <h3>📖 Autor mais lido</h3>
 
-          <h3>📚 Últimos Livros</h3>
+                <p>Carlos Ruiz Zafón</p>
 
-          <ul>
-            <li>Cidade de Ladrões</li>
-            <li>O Conde de Monte Cristo</li>
-            <li>O Labirinto dos Espíritos</li>
-          </ul>
+            </div>
 
-        </div>
+            <div class="box">
 
-        <div class="box">
+                <h3>📊 Estatísticas</h3>
 
-        <h3>⭐ Favorito</h3>
+                <p>Livros: <strong id="total-livros">0</strong></p>
 
-        <p>A Sombra do Vento</p>
+                <p>Autores: <strong id="total-autores">0</strong></p>
 
-      </div>
+            </div>
 
-        <div class="box">
-
-          <h3>📖 Autor mais lido</h3>
-
-          <p>Carlos Ruiz Zafón</p>
-
-        </div>
-
-        <div class="box">
-
-          <h3>📊 Estatísticas</h3>
-
-          <p>Livros: <strong>7</strong></p>
-          <p>Autores: <strong>3</strong></p>
-
-        </div>
-
-      </aside>
+        </aside>
 
     </main>
 
-  </body>
+    <!-- RODAPÉ -->
+
+    <footer>
+
+        <p>
+            © 2026 João Paulo • Meu Top Livros
+        </p>
+
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
 </html>
