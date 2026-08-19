@@ -8,8 +8,6 @@ date: "2025-07-12T00:00:00Z"
 title: 'Domínio de Logs: Gestão Avançada com journald e syslog-ng no Linux'
 ---
 
-# Domínio de Logs: Gestão Avançada com journald e syslog-ng no Linux
-
 ## O Sistema Nervoso do Linux
 Os logs são o sistema nervoso de qualquer servidor Linux, registrando:
 - Atividades do sistema e aplicações

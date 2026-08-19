@@ -9,8 +9,6 @@ tags:
 title: 'Mulheres no Código Aberto: Pioneiras Esquecidas'
 ---
 
-# Mulheres no Código Aberto: Pioneiras Esquecidas
-
 A história da tecnologia e do código aberto está repleta de contribuições femininas fundamentais — muitas vezes esquecidas. Neste post, destacamos o perfil de duas mulheres pioneiras na computação, projetos liderados por mulheres e iniciativas contemporâneas que buscam promover a diversidade e inclusão no ecossistema FOSS (Free and Open Source Software).
 
 ---

@@ -6,8 +6,6 @@ date: "2024-12-29T00:00:00Z"
 title: 'Domine Variáveis de Ambiente: Controle Dinâmico de Sistemas'
 ---
 
-# Domine Variáveis de Ambiente: Controle Dinâmico de Sistemas
-
 ## O Que São Variáveis de Ambiente?
 Pares **chave=valor** que configuram o comportamento do sistema e aplicações. Funcionam como "memória do sistema" para configurações essenciais.
 

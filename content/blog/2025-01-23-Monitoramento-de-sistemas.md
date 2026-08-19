@@ -6,8 +6,6 @@ date: "2025-01-23T00:00:00Z"
 title: 'Monitoramento de Sistemas Linux: Comandos Essenciais'
 ---
 
-# Monitoramento de Sistemas Linux: Comandos Essenciais
-
 Dominar ferramentas de monitoramento é crucial para administradores de sistemas Linux. Conheça os comandos fundamentais para diagnosticar desempenho, redes e recursos:
 
 ## 🖥️ 1. iostat (I/O Statistics)
