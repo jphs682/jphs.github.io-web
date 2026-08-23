@@ -1,17 +1,16 @@
 ---
-title: "Desvendando a Criptografia GPG"
-date: 2024-12-05
-description: "Entre chaves públicas, chaves privadas e assinaturas digitais, uma viagem pelo mundo da criptografia e pela ideia de proteger aquilo que é nosso."
+title: "Uma História que Ainda Não Terminou: GNU, Linux e o Código Aberto"
+date: 2024-10-11
+description: "Uma viagem pela história do movimento GNU, do Linux e do código aberto, acompanhando como uma ideia de liberdade acabou mudando a forma como construímos software."
 categories:
-  - segurança
-  - linux
   - código-aberto
+  - tecnologia
 tags:
-  - GPG
-  - criptografia
-  - OpenPGP
-  - segurança
-  - privacidade
+  - GNU
+  - Linux
+  - software-livre
+  - código-aberto
+  - FOSS
 draft: false
 ---
 

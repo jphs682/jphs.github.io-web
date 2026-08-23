@@ -1,5 +1,5 @@
 ---
-title: "Blog"
+title: "Diário de um Computador"
 description: "Crônicas, experiências e descobertas no mundo da tecnologia."
 ---
 

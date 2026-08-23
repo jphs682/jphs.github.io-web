@@ -1,16 +1,14 @@
 baseURL: "https://jphs682.github.io/jphs.github.io-web/"
 
-languageCode: "pt-br"
-locale: "pt-BR"
-defaultContentLanguage: "pt-br"
-
 title: "Diário de um Computador"
 
+defaultContentLanguage: "pt-br"
 enableEmoji: true
 
 languages:
   pt-br:
-    languageName: "Português"
+    label: "Português"
+    locale: "pt-BR"
     weight: 1
 
     menu:
@@ -40,20 +38,25 @@ languages:
           url: "https://github.com/jphs682"
           weight: 6
 
+
 taxonomies:
   category: categories
   tag: tags
+
 
 outputs:
   home:
     - HTML
     - RSS
 
+
 module:
   imports:
     - path: github.com/imfing/hextra
 
+
 markup:
+
   goldmark:
     renderer:
       unsafe: true
@@ -61,7 +64,15 @@ markup:
   highlight:
     noClasses: false
 
+
 params:
+
+  description: >
+    Diário de um Computador — crônicas, estudos e descobertas
+    sobre Linux, programação, código aberto e tecnologia.
+
+  author:
+    name: "João Paulo"
 
   navbar:
     displayTitle: true
@@ -74,7 +85,6 @@ params:
   theme:
     default: light
 
-  author:
-    name: "João Paulo"
 
-  description: "Crônicas, estudos e descobertas sobre Linux, programação, código aberto e tecnologia."
+  editURL:
+    enable: false

@@ -1,40 +1,24 @@
 ---
-title: "Diário de um Computador"
-description: "Crônicas, estudos e descobertas sobre tecnologia."
+title: " Diário de um Computador"
+description: "Crônicas, estudos e descobertas de um computador em constante aprendizado."
 ---
 
-Bem-vindo ao meu espaço de experimentação, aprendizado e descoberta no mundo da tecnologia.
+Este é o meu espaço para registrar descobertas, experiências e aprendizados sobre tecnologia.
 
-Aqui escrevo sobre aquilo que encontro pelo caminho:
+Aqui não existe uma obrigação de transformar tudo em tutorial. Algumas coisas são estudos, outras são experiências práticas e outras são simplesmente perguntas que surgiram enquanto eu tentava entender como um computador funciona.
 
-**Linux, programação, segurança, código aberto, redes e computação.**
+## O que você encontrará por aqui
 
-> Este não é apenas um lugar para guardar respostas.
-> É um registro das perguntas que encontrei pelo caminho.
+- 🐧 Linux e sistemas operacionais
+- 💻 Programação
+- 🔐 Segurança
+- 🌐 Redes
+- 🧩 Código aberto
+- 🧠 Algoritmos e matemática
+- ⚙️ Administração de sistemas
+- 🚀 Tecnologia
 
-## ✍️ Do diário
+---
 
-Algumas das coisas que venho estudando:
-
-- 🐧 Linux e administração de sistemas
-- 💻 Programação e algoritmos
-- 🔐 Segurança e privacidade
-- 🐙 Código aberto e software livre
-- 🌐 Redes e Internet
-- 🧮 Matemática aplicada à computação
-
-## 📚 Últimos artigos
-
-Acompanhe as últimas histórias publicadas no diário.
-
-{{< cards >}}
-  {{< card link="/blog/" title="Ver todos os artigos →" >}}
-{{< /cards >}}
-
-## 📖 Documentação
-
-Quando uma descoberta deixa de ser apenas uma história e passa a ser algo que preciso consultar novamente, ela vai para a documentação.
-
-{{< cards >}}
-  {{< card link="/docs/" title="Abrir documentação →" >}}
-{{< /cards >}}
+> Um computador nunca está realmente pronto.
+> Sempre existe alguma coisa nova para aprender, quebrar e tentar consertar.
