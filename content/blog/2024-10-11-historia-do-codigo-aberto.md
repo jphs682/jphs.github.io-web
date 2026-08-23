@@ -1,13 +1,10 @@
 ---
-
+title: "Uma História que Ainda Não Terminou: GNU, Linux e o Código Aberto"
+date: "2024-10-11T00:00:00Z"
+description: "Uma viagem pela história do software livre, do nascimento do projeto GNU à expansão do Linux e do código aberto."
 categories:
-
-* tecnologia
-* código aberto
-  date: "2024-10-11T00:00:00Z"
-  description: Uma viagem pela história do software livre e do código aberto, desde o nascimento do projeto GNU até a presença do Linux e das comunidades open source na tecnologia moderna.
-  title: História do Código Aberto e do Movimento GNU
-
+  - "tecnologia"
+  - "código aberto"
 ---
 
 # História do Código Aberto e do Movimento GNU

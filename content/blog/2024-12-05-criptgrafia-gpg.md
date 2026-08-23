@@ -1,12 +1,11 @@
 ---
-
+title: "Desvendando a Criptografia GPG: O Guardião Invisível"
+date: "2024-12-05T00:00:00Z"
+description: "Uma introdução à criptografia GPG e à maneira como chaves, assinaturas digitais e criptografia protegem informações no mundo Linux."
 categories:
-
-* tecnologia
-* código aberto
-  date: "2024-12-05T00:00:00Z"
-  title: Desvendando a Criptografia GPG
-
+  - "tecnologia"
+  - "código aberto"
+  - "segurança"
 ---
 
 # Desvendando a Criptografia GPG

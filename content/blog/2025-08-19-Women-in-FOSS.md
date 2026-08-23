@@ -1,15 +1,11 @@
 ---
-
+title: "Mulheres no Código Aberto: Histórias que Precisam ser Lembradas"
 date: "2025-08-19T00:00:00Z"
-tags:
-
-* código aberto
-* mulheres na tecnologia
-* inclusão
-* FOSS
-  title: "Mulheres no Código Aberto: Pioneiras que a História Quase Esqueceu"
-  description: "Uma crônica sobre mulheres que ajudaram a construir a história da computação e sobre a importância de tornar suas contribuições visíveis no presente do código aberto."
-
+description: "Uma reflexão sobre mulheres que ajudaram a construir a computação e sobre a importância da diversidade no movimento de código aberto."
+categories:
+  - "tecnologia"
+  - "código aberto"
+  - "inclusão"
 ---
 
 # Mulheres no Código Aberto: Pioneiras que a História Quase Esqueceu

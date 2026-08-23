@@ -1,184 +1,672 @@
 ---
-categories:
-- tecnologia
-- administração de sistemas
+title: "Quando o Servidor Começa a Dar Sinais: Monitoramento no Linux"
 date: "2025-01-23T00:00:00Z"
-title: 'Monitoramento de Sistemas Linux: Comandos Essenciais'
+description: "Uma introdução ao monitoramento de sistemas Linux e aos principais comandos para entender CPU, memória, disco, processos e rede."
+categories:
+  - "tecnologia"
+  - "linux"
+  - "administração de sistemas"
 ---
 
-Dominar ferramentas de monitoramento é crucial para administradores de sistemas Linux. Conheça os comandos fundamentais para diagnosticar desempenho, redes e recursos:
+# Monitoramento de Sistemas Linux: Aprendendo a Ouvir o Servidor
 
-## 🖥️ 1. iostat (I/O Statistics)
-**Função**: Monitora CPU e operações de disco  
-**Instalação**:
+É segunda-feira.
+
+O servidor está funcionando.
+
+Pelo menos, é o que deveria estar fazendo.
+
+Até que alguém liga:
+
+> “O sistema está lento.”
+
+Essa frase parece simples.
+
+Mas, para quem administra servidores, ela pode esconder dezenas de problemas diferentes.
+
+Pode ser CPU.
+
+Pode ser memória.
+
+Pode ser disco.
+
+Pode ser rede.
+
+Pode ser um processo consumindo recursos demais.
+
+Pode ser simplesmente falta de espaço.
+
+E existe uma pergunta que aparece quase imediatamente:
+
+**“O que está acontecendo com o servidor?”**
+
+A primeira reação de quem está começando pode ser reiniciar a máquina.
+
+Às vezes funciona.
+
+Mas reiniciar também pode apagar pistas importantes.
+
+O administrador experiente geralmente faz outra coisa.
+
+Ele abre o terminal.
+
+E começa a perguntar ao sistema.
+
+## O Linux está sempre contando alguma coisa
+
+Um servidor não costuma dizer:
+
+> “Estou com pouca memória.”
+
+Ele mostra números.
+
+Não diz:
+
+> “Este processo está me deixando lento.”
+
+Ele mostra um PID consumindo CPU.
+
+Não diz:
+
+> “O disco está sofrendo.”
+
+Ele apresenta tempos de espera e operações de I/O.
+
+O trabalho do administrador é transformar esses números em uma história.
+
+E o Linux oferece várias ferramentas para isso.
+
+Não precisamos de uma solução gigantesca para começar.
+
+Às vezes, alguns comandos são suficientes para encontrar a primeira pista.
+
+## Primeiro: quem está usando o sistema?
+
+Um bom diagnóstico pode começar de maneira simples:
+
 ```bash
-# Debian/Ubuntu
+w
+```
+
+O comando `w` mostra informações sobre os usuários atualmente conectados, quanto tempo estão ociosos e o que estão executando.
+
+Parece simples.
+
+Mas, em um servidor compartilhado, essa informação pode ser importante.
+
+Imagine descobrir que alguém iniciou uma tarefa pesada exatamente no momento em que o sistema começou a ficar lento.
+
+A investigação já ganhou uma direção.
+
+## Depois: o que está acontecendo agora?
+
+Se queremos uma visão dinâmica dos processos, um dos comandos clássicos é:
+
+```bash
+top
+```
+
+Ao executar `top`, o terminal deixa de ser apenas uma tela de comandos.
+
+Ele começa a se movimentar.
+
+Processos aparecem.
+
+Números mudam.
+
+A CPU sobe e desce.
+
+A memória é consumida.
+
+É quase como olhar para os batimentos cardíacos de uma máquina.
+
+Dentro do `top`, algumas teclas são particularmente úteis:
+
+* `P` — ordenar por uso de CPU;
+* `M` — ordenar por uso de memória;
+* `k` — enviar um sinal para um processo;
+* `1` — mostrar o uso individual das CPUs.
+
+A pergunta agora é outra:
+
+**Existe algum processo roubando recursos demais?**
+
+## Quando um processo vira suspeito
+
+Se o `top` apontar para um processo específico, podemos investigá-lo melhor.
+
+O comando `ps` é um dos clássicos para isso:
+
+```bash
+ps aux --sort=-%cpu | head
+```
+
+Aqui estamos ordenando os processos pelo uso de CPU.
+
+Se o problema for memória:
+
+```bash
+ps aux --sort=-%mem | head
+```
+
+Agora os maiores consumidores de memória aparecem primeiro.
+
+É uma diferença pequena no comando.
+
+Mas muda completamente a pergunta que estamos fazendo.
+
+Não estamos mais perguntando:
+
+> “Quais processos existem?”
+
+Estamos perguntando:
+
+> **“Quem está consumindo meus recursos?”**
+
+## CPU alta não significa necessariamente problema
+
+Existe uma armadilha comum no monitoramento.
+
+Ver a CPU em 100% e concluir imediatamente:
+
+> “O servidor está com problema.”
+
+Nem sempre.
+
+Um servidor pode utilizar praticamente toda a CPU e estar funcionando perfeitamente.
+
+O problema aparece quando o uso elevado está relacionado a uma situação anormal: processos presos, tarefas inesperadas, filas crescendo ou usuários enfrentando lentidão.
+
+Monitoramento não é decorar números mágicos.
+
+É entender o contexto.
+
+## E a memória?
+
+Agora imagine que a CPU não está particularmente alta.
+
+Mas o sistema continua lento.
+
+A próxima suspeita pode ser memória.
+
+Um comando simples para começar:
+
+```bash
+free -h
+```
+
+Ele mostra informações sobre memória RAM e swap em um formato legível.
+
+Mas existe um detalhe importante.
+
+No Linux, **“memória livre” não deve ser interpretada simplesmente como “memória disponível”**.
+
+O sistema utiliza RAM para cache e buffers e pode liberar parte desses recursos quando necessário.
+
+Por isso, ao analisar memória, precisamos observar o conjunto das informações, especialmente a memória disponível e o comportamento da swap.
+
+Se quisermos acompanhar o comportamento ao longo do tempo, podemos utilizar:
+
+```bash
+vmstat 1
+```
+
+Agora não estamos vendo apenas uma fotografia.
+
+Estamos vendo uma sequência.
+
+E sequência é importante.
+
+Uma máquina pode parecer saudável em um instante e apresentar um problema alguns segundos depois.
+
+## Quando a memória vai para o disco
+
+Entre os dados apresentados pelo `vmstat`, existem indicadores relacionados à troca entre memória e swap.
+
+Os campos `si` e `so`, por exemplo, ajudam a observar movimentações de swap.
+
+Se o sistema está constantemente recorrendo à swap, isso pode ser um sinal de pressão de memória.
+
+Mas, novamente:
+
+**um único número raramente conta a história inteira.**
+
+É preciso observar o comportamento.
+
+Durante alguns segundos.
+
+Durante alguns minutos.
+
+Durante períodos de carga.
+
+É aí que o monitoramento começa a se aproximar de uma investigação.
+
+## E se o problema for o disco?
+
+Agora imagine outro cenário.
+
+CPU normal.
+
+Memória razoável.
+
+Mas tudo parece lento.
+
+Abrir arquivos demora.
+
+Uma aplicação responde lentamente.
+
+O banco de dados parece travado.
+
+Talvez o problema esteja no armazenamento.
+
+É aqui que entra o `iostat`.
+
+Primeiro, em sistemas Debian ou Ubuntu, ele normalmente é disponibilizado pelo pacote `sysstat`:
+
+```bash
 sudo apt install sysstat
-
-# Red Hat/CentOS
-sudo yum install sysstat
 ```
-**Uso**:
+
+Em sistemas Fedora, RHEL e derivados, o gerenciador de pacotes pode variar conforme a distribuição e a versão.
+
+Depois podemos consultar estatísticas de I/O:
 
 ```bash
-
-iostat -x 1 5  # Detalhes de I/O, atualiza a cada 1s (5 vezes)
+iostat -xz 1
 ```
-## Saída-chave:
 
-- **%util**: % de tempo do disco ocupado
+Entre os campos que merecem atenção estão indicadores como:
 
-- **await**: Tempo médio de espera por I/O (ms)
+* `%util` — tempo em que o dispositivo esteve ocupado;
+* `await` — tempo médio de espera de I/O;
+* `tps` — operações por segundo, dependendo do dispositivo e da versão da ferramenta.
 
-- **tps**: Transações por segundo
+Esses números podem ajudar a responder uma pergunta importante:
 
-## 🌐 2. netstat (Network Statistics)
-**Função**: Exibe conexões de rede e portas
-**Instalação**:
+**o armazenamento está sendo o gargalo?**
+
+## Espaço livre é outra história
+
+Às vezes o disco não está lento.
+
+Ele simplesmente está cheio.
+
+O comando:
 
 ```bash
-# Debian/Ubuntu
-sudo apt install net-tools
+df -h
 ```
-### Comandos úteis:
+
+é um dos primeiros que devemos lembrar.
+
+Se quisermos visualizar também o tipo de sistema de arquivos:
 
 ```bash
-netstat -tuln    # Portas TCP/UDP em escuta
-netstat -s       # Estatísticas por protocolo
-netstat -r       # Tabela de roteamento
+df -hT
 ```
-### Alternativa moderna:
+
+Agora podemos descobrir algo como:
+
+```text
+Filesystem      Size  Used Avail Use%
+/dev/sda1       100G   98G    2G  98%
+```
+
+Noventa e oito por cento.
+
+Talvez seja hora de investigar.
+
+## Mas quem está ocupando o espaço?
+
+O `df` responde:
+
+> “Quanto espaço está sendo utilizado?”
+
+O `du` ajuda a responder:
+
+> **“Onde esse espaço está sendo utilizado?”**
+
+Por exemplo:
 
 ```bash
-ss -tunlp  # Equivalente com melhor performance
+du -sh /var/log
 ```
-## 👥 3. w (**Who** & What)
-**Função**: Mostra usuários logados e processos
-**Exemplo**:
+
+Ou podemos analisar os diretórios de um nível específico:
 
 ```bash
-w  # Exibe: usuário, terminal, tempo idle, processo atual
+du -h --max-depth=1 /home
 ```
-## 📊 4. sar (System Activity Reporter)
-**Função**: Coleta histórica de desempenho
-**Uso**:
+
+Em sistemas com muitos arquivos, ferramentas interativas como `ncdu` também podem facilitar bastante essa investigação.
+
+De repente, descobrimos que um diretório de logs cresceu para dezenas de gigabytes.
+
+O problema que parecia misterioso começa a fazer sentido.
+
+## E a rede?
+
+Talvez o servidor esteja saudável.
+
+CPU normal.
+
+Memória normal.
+
+Disco normal.
+
+Mas ninguém consegue acessar determinada aplicação.
+
+Agora precisamos olhar para a rede.
+
+Durante muito tempo, administradores utilizaram o `netstat` para consultar conexões e portas.
+
+Ainda é possível encontrá-lo em muitos sistemas, mas atualmente o comando `ss` é geralmente a escolha preferida.
+
+Por exemplo:
 
 ```bash
-sar -u 2 5      # CPU a cada 2s (5 amostras)
-sar -r 1 3      # Memória
-sar -d -p 1 3   # Disco por dispositivo
+ss -tulnp
 ```
-## 🧩 5. ps (Process Status)
-**Função**: Lista processos ativos
-**Comando essencial**:
+
+Podemos utilizá-lo para observar sockets TCP e UDP em escuta e, quando permitido, os processos associados.
+
+Para conexões estabelecidas:
 
 ```bash
-ps aux --sort=-%cpu | head  # Top 10 processos por CPU
+ss -tunp
 ```
-**Campos importantes**:
 
-- **PID**: ID do processo
+Agora a pergunta muda novamente:
 
-- **%CPU**: Uso de CPU
+**O serviço está realmente ouvindo na porta esperada?**
 
-- **%MEM**: Uso de memória
+## Uma porta aberta não significa que tudo está funcionando
 
-- **STAT**: Estado do processo
+Essa é outra armadilha.
 
-## 🚀 6. top (Task Manager)
-**Função**: Monitoramento em tempo real
-Atalhos dentro do top:
-|---|
-- **P**: Ordenar por CPU
+Encontrar uma porta aberta não significa que a aplicação esteja saudável.
 
-- **M**: Ordenar por memória
+Pode existir um processo ouvindo na porta, mas a aplicação estar travada.
 
-- **k**: Matar processo
+Pode haver problemas de firewall.
 
-- **1**: Mostrar CPUs individuais
+Pode existir uma falha de roteamento.
 
-## 🧠 7. vmstat (Virtual Memory Stats)
-**Função**: Analisa memória, processos e I/O
-**Uso**:
+Pode haver perda de pacotes.
+
+Por isso, monitorar rede não significa apenas olhar portas.
+
+É preciso observar o caminho inteiro.
+
+Dependendo do caso, ferramentas como `ping`, `traceroute` ou `tracepath` podem ajudar a investigar conectividade.
+
+E, quando o serviço é gerenciado pelo `systemd`, os logs podem revelar o restante da história:
 
 ```bash
-vmstat 1  # Atualiza a cada 1 segundo
+journalctl -u nome-do-servico
 ```
-**Saída crítica*:
 
-- ```si/so```: Swap in/out (alto = problema)
+## Quando uma fotografia não é suficiente
 
-- ```us/sy```: % CPU user/system
+Até agora estamos olhando para o sistema naquele momento.
 
-- ```free```: Memória livre (KB)
+Mas e se quisermos saber:
 
-## 💾 8. df (Disk Free)
-**Função**: Espaço em sistemas de arquivos
-**Exemplo**:
+> “O que aconteceu ontem?”
+
+É aí que ferramentas como o **sar**, do pacote `sysstat`, tornam-se interessantes.
+
+Podemos consultar métricas de CPU:
 
 ```bash
-df -hT  # Legível + tipos de filesystem
+sar -u 2 5
 ```
-## 📁 9. du (Disk Usage)
-**Função**: Uso de espaço por diretório
-**Comandos**:
+
+Memória:
 
 ```bash
-du -sh /var/log  # Resumo do diretório
-du -h --max-depth=1 /home  # Top-level
+sar -r 1 3
 ```
-🧠 10. free (Memory Usage)
-**Função**: Exibe uso de RAM e swap
-**Uso**:
+
+E atividade de dispositivos:
 
 ```bash
-free -m  # Exibe em MB
-free -h  # Formato legível
+sar -d -p 1 3
 ```
-## 🔍 Fluxo de Diagnóstico 
 
-```mermaid
-graph TD
-    A[Sintoma] --> B{Identifique}
-    B -->|Desempenho| C["top/htop"]
-    B -->|Rede| D["ss -tunlp"]
-    B -->|Disco| E["df -h; du -sh /*"]
-    B -->|Memória| F["free -h"]
-    
-    C --> G{{CPU alta?}}
-    G -->|Sim| H["ps aux --sort=-%cpu"]
-    G -->|Não| I["iostat -x 1"]
-    
-    D --> J{{Portas fechadas?}}
-    J -->|Sim| K["journalctl -u serviço"]
-    J -->|Não| L["ping; traceroute"]
-    
-    E --> M{{Espaço insuficiente?}}
-    M -->|Sim| N["ncdu /"]
-    M -->|Não| O["iostat -d"]
-    
-    F --> P{{Swap alto?}}
-    P -->|Sim| Q["ps aux --sort=-%mem"]
-    P -->|Não| R["vmstat 1"]
+O grande valor do `sar` está na possibilidade de trabalhar também com dados históricos quando a coleta está configurada.
+
+Isso muda completamente a investigação.
+
+Agora não precisamos depender apenas da memória de quem estava administrando o servidor.
+
+Podemos olhar para os dados.
+
+## O problema pode ter acontecido às três da manhã
+
+Imagine que o sistema esteja normal agora.
+
+O usuário, porém, afirma:
+
+> “Às três da manhã ficou impossível trabalhar.”
+
+Se não houver dados históricos, temos um problema.
+
+A máquina já voltou ao normal.
+
+O administrador chegou depois.
+
+E não existe testemunha.
+
+Ou melhor...
+
+Existe.
+
+O `sar`.
+
+Quando configurado corretamente, o monitoramento histórico permite voltar no tempo e observar o comportamento dos recursos.
+
+CPU.
+
+Memória.
+
+I/O.
+
+Carga.
+
+E outras métricas.
+
+O servidor pode ter esquecido.
+
+Mas os registros podem lembrar.
+
+## O verdadeiro segredo é combinar ferramentas
+
+Nenhum desses comandos é mágico.
+
+O administrador não precisa escolher entre `top`, `free`, `iostat`, `ss`, `df` ou `sar`.
+
+Na verdade, eles funcionam melhor juntos.
+
+Imagine uma investigação:
+
+```text
+Sintoma
+   ↓
+O sistema está lento?
+   ↓
+top / w
+   ↓
+CPU está alta?
+   ├── Sim → ps
+   └── Não
+        ↓
+Memória está sob pressão?
+   ├── Sim → free / vmstat
+   └── Não
+        ↓
+I/O está lento?
+   ├── Sim → iostat
+   └── Não
+        ↓
+Disco está cheio?
+   ├── Sim → df / du
+   └── Não
+        ↓
+Problema de rede?
+   ├── Sim → ss / ping / tracepath
+   └── Não
+        ↓
+Investigar logs e histórico
 ```
-## Dicas Profissionais
-- 1.Log histórico: Configure ```sar``` para coleta diária (editando ```/etc/cron.d/sysstat```)
 
-- 2.Monitoramento contínuo:
+Não é uma receita universal.
 
-```bash
-watch -n 2 'df -h; echo; free -h'  # Atualiza a cada 2s
+É uma maneira de organizar o pensamento.
+
+## Monitoramento não é apenas olhar números
+
+Talvez essa seja a principal lição.
+
+Um iniciante pode aprender dez comandos.
+
+Um administrador experiente aprende **quando usar cada um**.
+
+Ele não executa `top` porque alguém disse que `top` é importante.
+
+Ele executa porque existe uma pergunta:
+
+> “Quem está consumindo CPU?”
+
+Não usa `df` simplesmente porque conhece o comando.
+
+Usa porque precisa descobrir:
+
+> “Será que o sistema de arquivos está cheio?”
+
+Não consulta `ss` por hábito.
+
+Consulta porque quer saber:
+
+> “O serviço está ouvindo onde deveria?”
+
+Essa mudança parece pequena.
+
+Mas é enorme.
+
+## O servidor não fala português
+
+O servidor não vai dizer:
+
+> “João, o problema está no disco.”
+
+Ele vai mostrar:
+
+```text
+await
+%util
+iowait
 ```
-- 3.Combinações poderosas:
 
-```bash
-# Top 5 processos consumindo memória
-ps aux --sort=-%mem | head -6
+Não vai dizer:
 
-# Conexões ESTABLISHED por IP
-netstat -tun | grep 'ESTAB' | awk '{print $5}' | cut -d: -f1 | sort | uniq -c
+> “Maria, estou ficando sem memória.”
+
+Ele vai mostrar:
+
+```text
+available
+swap
+si
+so
 ```
-**Importante**: Para troubleshooting, sempre comece com ```w```, ```top``` e ```free``` - dão visão geral imediata do sistema.
+
+Não vai dizer:
+
+> “A aplicação está ouvindo na porta errada.”
+
+Ele vai mostrar sockets.
+
+É responsabilidade do administrador aprender a traduzir esses sinais.
+
+## E então encontramos o problema
+
+Voltamos àquela segunda-feira.
+
+O usuário continua esperando uma resposta.
+
+Depois de alguns minutos investigando, encontramos a causa.
+
+Não era a rede.
+
+Não era a CPU.
+
+Não era a memória.
+
+O disco estava quase cheio.
+
+Um arquivo de log havia crescido muito além do esperado.
+
+Agora existe uma explicação.
+
+Mais importante:
+
+existe uma oportunidade de prevenção.
+
+Podemos revisar a retenção.
+
+Configurar rotação.
+
+Criar alertas.
+
+Acompanhar o crescimento.
+
+Talvez, na próxima vez, o sistema avise antes de alguém perceber a lentidão.
+
+E é aí que monitoramento deixa de ser apenas **apagar incêndios**.
+
+Ele passa a ser prevenção.
+
+## Aprender a ouvir
+
+Administrar Linux é, em muitos aspectos, aprender uma nova linguagem.
+
+No começo, vemos apenas comandos.
+
+Depois começamos a enxergar sinais.
+
+Um número sobe.
+
+Outro cai.
+
+Um processo aparece no topo.
+
+Uma porta desaparece.
+
+A swap começa a ser utilizada.
+
+O disco fica cheio.
+
+Um serviço reinicia.
+
+E, aos poucos, aquilo deixa de ser apenas um monte de números.
+
+Começa a formar uma história.
+
+Talvez essa seja a verdadeira função do monitoramento.
+
+Não saber todos os comandos.
+
+Não decorar todas as opções.
+
+Mas aprender a fazer perguntas ao sistema e interpretar as respostas.
+
+Porque um servidor raramente fica em silêncio.
+
+Ele está falando o tempo inteiro.
+
+**Só precisamos aprender a escutar.**
+
 
 ## 📚 Referências Essenciais
 
