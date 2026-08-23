@@ -1,13 +1,19 @@
 ---
-title: "Uma História que Ainda Não Terminou: GNU, Linux e o Código Aberto"
-date: "2024-10-11T00:00:00Z"
-description: "Uma viagem pela história do software livre, do nascimento do projeto GNU à expansão do Linux e do código aberto."
+title: "Desvendando a Criptografia GPG"
+date: 2024-12-05
+description: "Entre chaves públicas, chaves privadas e assinaturas digitais, uma viagem pelo mundo da criptografia e pela ideia de proteger aquilo que é nosso."
 categories:
-  - "tecnologia"
-  - "código aberto"
+  - segurança
+  - linux
+  - código-aberto
+tags:
+  - GPG
+  - criptografia
+  - OpenPGP
+  - segurança
+  - privacidade
+draft: false
 ---
-
-# História do Código Aberto e do Movimento GNU
 
 Talvez você nunca tenha parado para pensar nisso, mas existe uma pergunta escondida dentro de quase todo computador:
 

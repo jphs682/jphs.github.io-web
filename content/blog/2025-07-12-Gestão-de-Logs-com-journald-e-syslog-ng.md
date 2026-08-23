@@ -1,15 +1,20 @@
 ---
-title: "Quando o Linux Fala: Uma Crônica Sobre Logs e Servidores"
-date: "2025-07-12T00:00:00Z"
-description: "Uma introdução à gestão e investigação de logs no Linux usando journald, syslog-ng e ferramentas de análise."
+title: "As Histórias que o Computador Guarda: Uma Jornada pelos Logs do Linux"
+date: 2025-07-12
+description: "Logs são como um diário escondido dentro do sistema. Nesta jornada, vamos aprender a encontrá-los, interpretá-los e usá-los para descobrir o que realmente aconteceu."
 categories:
-  - "tecnologia"
-  - "segurança"
-  - "linux"
-  - "devops"
+  - linux
+  - segurança
+  - devops
+tags:
+  - linux
+  - logs
+  - journald
+  - journalctl
+  - syslog-ng
+  - administração-de-sistemas
+draft: false
 ---
-
-# Domínio dos Logs: Quando o Linux Conta Sua História
 
 São duas da manhã.
 

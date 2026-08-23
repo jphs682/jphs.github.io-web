@@ -1,14 +1,19 @@
 ---
-title: "Quando o Servidor Começa a Dar Sinais: Monitoramento no Linux"
-date: "2025-01-23T00:00:00Z"
-description: "Uma introdução ao monitoramento de sistemas Linux e aos principais comandos para entender CPU, memória, disco, processos e rede."
+title: "Quando o Computador Começa a Reclamar: Monitorando um Sistema Linux"
+date: 2025-01-23
+description: "CPU, memória, disco e rede contam histórias sobre o que está acontecendo dentro de um computador. Aprendendo a ouvir essas histórias com as ferramentas do Linux."
 categories:
-  - "tecnologia"
-  - "linux"
-  - "administração de sistemas"
+  - linux
+  - administração-de-sistemas
+tags:
+  - linux
+  - monitoramento
+  - top
+  - ps
+  - iostat
+  - vmstat
+draft: false
 ---
-
-# Monitoramento de Sistemas Linux: Aprendendo a Ouvir o Servidor
 
 É segunda-feira.
 

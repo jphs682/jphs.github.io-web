@@ -1,16 +1,17 @@
 ---
-title: "Controle Total: Dominando Permissões no Linux para Segurança de Dados"
-date: "2024-10-08T00:00:00Z"
-description: "Uma viagem pelas permissões do Linux e pelos mecanismos que determinam quem pode acessar, modificar e executar arquivos e diretórios."
+title: "Controle Total: Dominando Permissões no Linux"
+date: 2024-10-08
+description: "Uma caminhada pelas permissões do Linux, entendendo como arquivos, usuários e grupos definem quem pode acessar, modificar ou executar alguma coisa."
 categories:
-  - tecnologia
-  - segurança
   - linux
+  - segurança
+tags:
+  - linux
+  - permissões
+  - chmod
+  - chown
+draft: false
 ---
-
-# Controle Total: Uma Crônica Sobre as Permissões do Linux
-
-## O Linux não confia em ninguém
 
 Imagine que você acabou de instalar um Linux.
 

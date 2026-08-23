@@ -1,14 +1,18 @@
 ---
-title: "As Variáveis que Ninguém Vê: Uma Crônica Sobre o Ambiente Linux"
-date: "2024-12-29T00:00:00Z"
-description: "Uma introdução às variáveis de ambiente e ao papel silencioso que elas desempenham na configuração de sistemas e aplicações."
+title: "Variáveis de Ambiente: As Pequenas Mensagens que Controlam o Sistema"
+date: 2024-12-29
+description: "Uma descoberta sobre as variáveis de ambiente e como pequenos pares de chave e valor conseguem mudar o comportamento de programas e sistemas inteiros."
 categories:
-  - "tecnologia"
-  - "linux"
-  - "sistemas operacionais"
+  - linux
+  - sistemas-operacionais
+tags:
+  - linux
+  - variáveis-de-ambiente
+  - bash
+  - zsh
+  - terminal
+draft: false
 ---
-
-# Variáveis de Ambiente: O Que o Sistema Sabe Antes de Você Perguntar
 
 Existe uma coisa curiosa quando abrimos um terminal Linux.
 

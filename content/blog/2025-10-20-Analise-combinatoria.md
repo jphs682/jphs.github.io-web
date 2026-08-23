@@ -1,14 +1,19 @@
 ---
-title: "Quantos Apertos de Mão? Uma Pequena História Sobre Matemática e Algoritmos"
-date: "2025-10-20T00:00:00Z"
-description: "Um problema aparentemente simples de apertos de mão revela como a Matemática Discreta pode transformar algoritmos lentos em soluções eficientes."
+title: "Quantos Apertos de Mão? Uma Pequena História sobre Matemática e Algoritmos"
+date: 2025-10-20
+description: "Um problema aparentemente simples de apertos de mão revela uma das ideias mais bonitas da Matemática Discreta: encontrar padrões para resolver problemas com menos esforço."
 categories:
-  - "tecnologia"
-  - "programação"
-  - "matemática"
+  - programação
+  - matemática
+  - tecnologia
+tags:
+  - matemática-discreta
+  - combinatória
+  - algoritmos
+  - python
+  - complexidade
+draft: false
 ---
-
-# Quantos apertos de mão?
 
 Imagine uma sala cheia de pessoas.
 

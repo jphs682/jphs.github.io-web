@@ -1,16 +1,18 @@
 ---
-title: "Do Código ao Programa: Quando a Ideia Ganha Vida no Linux"
-date: "2024-10-11T00:00:00Z"
-description: "Uma crônica sobre o compilação, terminal e o caminho percorrido por um codigo ate se trasnformar em um programa execultavel no linux ."
+title: "Compilar Códigos no Linux: Do Código à Máquina"
+date: 2024-10-11
+description: "Uma conversa sobre o caminho que um código percorre desde algumas linhas escritas no terminal até se transformar em um programa que o computador consegue executar."
 categories:
-- "tecnologia"
-- "código aberto"
-- "Programação"
-- "linux"
+  - programação
+  - linux
+tags:
+  - linux
+  - compilação
+  - gcc
+  - programação
+  - terminal
+draft: false
 ---
-
-
-# Do Código ao Programa: Quando a Ideia Ganha Vida no Linux
 
 Existe um momento curioso na vida de quem começa a programar.
 
