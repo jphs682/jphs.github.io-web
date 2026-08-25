@@ -34,9 +34,16 @@ languages:
           pageRef: /about
           weight: 5
 
-        - name: "GitHub ↗"
-          url: "https://github.com/jphs682"
+        - name: Search
           weight: 6
+          params:
+            type: search
+
+        - name: GitHub
+          url: "https://github.com/jphs682"
+          weight: 7
+          params:
+            icon: github
 
 
 taxonomies:
@@ -73,6 +80,7 @@ params:
 
   author:
     name: "João Paulo"
+    email: "jphs@discente.ifpe.edu.br"
 
   navbar:
     displayTitle: true
@@ -83,8 +91,15 @@ params:
     displayPoweredBy: false
 
   theme:
-    default: light
-
+    default: system
+    displayToggle: true
 
   editURL:
     enable: false
+
+  search:
+    enable: true
+    type: flexsearch
+    flexsearch:
+      index: content
+      tokenize: forward

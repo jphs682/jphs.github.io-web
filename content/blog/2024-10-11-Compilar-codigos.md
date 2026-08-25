@@ -52,7 +52,7 @@ Criamos um arquivo:
 
 ```bash
 nano programa.c
-````
+```
 
 E escrevemos:
 

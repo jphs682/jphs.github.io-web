@@ -13,6 +13,8 @@ tags:
   - segurança
   - privacidade
 draft: false
+aliases:
+  - /blog/2024-12-05-criptgrafia-gpg/
 ---
 
 Existe uma cena bastante comum no mundo da tecnologia: alguém termina de escrever um arquivo, fecha o editor e pensa que o trabalho está concluído.

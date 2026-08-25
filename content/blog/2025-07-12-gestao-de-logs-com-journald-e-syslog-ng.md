@@ -14,6 +14,8 @@ tags:
   - syslog-ng
   - administração-de-sistemas
 draft: false
+aliases:
+  - /blog/2025-07-12-gestão-de-logs-com-journald-e-syslog-ng/
 ---
 
 São duas da manhã.

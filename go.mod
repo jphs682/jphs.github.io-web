@@ -1,5 +1,5 @@
 module github.com/jphs682/jphs.github.io-web
 
-go 1.26.6
+go 1.27.0
 
 require github.com/imfing/hextra v0.12.3 // indirect

@@ -53,7 +53,7 @@ Execute:
 
 ```bash
 ls -l
-````
+```
 
 Em algum momento você provavelmente encontrará algo parecido com:
 
