@@ -12,7 +12,7 @@ tags:
   - repositorio
   - codigo-aberto
 
-draft: true
+draft: false
 ---
 
 Era uma daquelas coisas que pareciam óbvias.
