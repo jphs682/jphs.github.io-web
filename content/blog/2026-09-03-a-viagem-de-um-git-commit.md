@@ -12,7 +12,7 @@ tags:
 - working-tree
 - remote
 - controle-de-versao
-draft: true
+draft: false
 ---
 
 Era só uma pequena alteração.
