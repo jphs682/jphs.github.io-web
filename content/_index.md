@@ -1,5 +1,5 @@
 ---
-title: " Diário de um Computador"
+title: "Diário de um Computador"
 description: "Crônicas, estudos e descobertas de um computador em constante aprendizado."
 ---
 

@@ -1,7 +1,17 @@
-
-Claro. Eu faria o artigo com uma pegada de **crônica + tutorial**, mostrando que o `.bashrc` pode deixar de ser apenas um arquivo de configuração e virar uma espécie de “caixa de ferramentas” pessoal.
-
-# Personalizando o Bash: Transformando o Terminal em uma Ferramenta Pessoal
+---
+title: "Personalizando o Bash: Transformando o Terminal em uma Ferramenta Pessoal"
+date: 2026-09-06
+description: "O .bashrc deixa de ser só um arquivo de configuração e vira uma caixa de ferramentas pessoal: aliases, funções e o hábito de ensinar o terminal a trabalhar do seu jeito."
+categories:
+  - linux
+  - sistemas-operacionais
+tags:
+  - linux
+  - bash
+  - terminal
+  - shell
+draft: true
+---
 
 Existe uma diferença entre **usar o terminal** e **fazer o terminal trabalhar do seu jeito**.
 
@@ -81,7 +91,7 @@ A partir daí, qualquer alias ou função definida no arquivo passa a estar disp
 
 ---
 
-# Começando pelos aliases
+## Começando pelos aliases
 
 Um dos recursos mais simples do Bash é o `alias`.
 
@@ -171,7 +181,7 @@ em vez de simplesmente apresentar números de bytes.
 
 ---
 
-# Pequenos atalhos para navegar
+## Pequenos atalhos para navegar
 
 Outra coisa que fazemos o tempo inteiro é subir diretórios.
 
@@ -228,7 +238,7 @@ Até o momento em que você começa a usar.
 
 ---
 
-# Voltando para o diretório anterior
+## Voltando para o diretório anterior
 
 Existe outro pequeno truque interessante.
 
@@ -270,7 +280,7 @@ O Bash volta para `/tmp`.
 
 ---
 
-# E se o `cd` pudesse fazer mais?
+## E se o `cd` pudesse fazer mais?
 
 Aqui começa uma parte mais interessante.
 
@@ -364,7 +374,7 @@ o `ls` não será executado no diretório errado.
 
 ---
 
-# Criando diretório e entrando nele
+## Criando diretório e entrando nele
 
 Uma tarefa bastante comum é:
 
@@ -401,7 +411,7 @@ E nossa função entra no último diretório criado.
 
 ---
 
-# Procurando arquivos
+## Procurando arquivos
 
 Depois de algum tempo trabalhando no Linux, aparece uma pergunta inevitável:
 
@@ -441,7 +451,7 @@ Uma função pequena, mas que economiza bastante digitação.
 
 ---
 
-# Descobrindo quem está ocupando o disco
+## Descobrindo quem está ocupando o disco
 
 Uma das coisas mais irritantes é descobrir que o disco está ficando cheio sem saber exatamente por quê.
 
@@ -479,7 +489,7 @@ O `sort -h` organiza os tamanhos de maneira que fique mais fácil descobrir quai
 
 ---
 
-# Procurando processos
+## Procurando processos
 
 Outra situação comum:
 
@@ -529,7 +539,7 @@ psg ssh
 
 ---
 
-# Descobrindo informações sobre a máquina
+## Descobrindo informações sobre a máquina
 
 Podemos também criar uma pequena função para reunir algumas informações úteis:
 
@@ -575,7 +585,7 @@ Não substitui ferramentas especializadas, mas é uma maneira rápida de obter u
 
 ---
 
-# Descobrindo os endereços de rede
+## Descobrindo os endereços de rede
 
 Podemos criar também:
 
@@ -604,7 +614,7 @@ ip addr
 
 ---
 
-# Criando e abrindo um arquivo
+## Criando e abrindo um arquivo
 
 Se você usa `nano`, pode criar uma função:
 
@@ -628,7 +638,7 @@ Até você perceber que está fazendo isso várias vezes por dia.
 
 ---
 
-# Extraindo arquivos automaticamente
+## Extraindo arquivos automaticamente
 
 Também podemos criar funções mais inteligentes.
 
@@ -671,7 +681,7 @@ Isso começa a mostrar uma das grandes forças do shell:
 
 ---
 
-# Não transforme o `.bashrc` em uma bagunça
+## Não transforme o `.bashrc` em uma bagunça
 
 Existe uma tentação depois que descobrimos os aliases e funções:
 
@@ -690,9 +700,9 @@ com centenas de linhas que já nem lembramos para que servem.
 Uma organização inicial pode ser:
 
 ```bash
-# =========================
-# ALIASES
-# =========================
+## =========================
+## ALIASES
+## =========================
 
 alias ll='ls -lah'
 alias la='ls -A'
@@ -708,9 +718,9 @@ alias c='clear'
 alias ips='ip -br addr'
 
 
-# =========================
-# NAVEGAÇÃO
-# =========================
+## =========================
+## NAVEGAÇÃO
+## =========================
 
 cd() {
     builtin cd "$@" || return
@@ -723,9 +733,9 @@ mkcd() {
 }
 
 
-# =========================
-# BUSCA
-# =========================
+## =========================
+## BUSCA
+## =========================
 
 ff() {
     find . -type f -iname "*$1*"
@@ -736,9 +746,9 @@ psg() {
 }
 
 
-# =========================
-# SISTEMA
-# =========================
+## =========================
+## SISTEMA
+## =========================
 
 duh() {
     du -h --max-depth=1 2>/dev/null | sort -h
@@ -751,7 +761,7 @@ A ideia é escolher aquilo que realmente faz sentido para você.
 
 ---
 
-# E talvez esse seja o ponto mais interessante
+## E talvez esse seja o ponto mais interessante
 
 Quando começamos a personalizar o Bash, não estamos simplesmente criando atalhos.
 
@@ -781,7 +791,7 @@ E, pouco a pouco, aquele terminal que parecia igual ao de qualquer outra pessoa 
 
 ---
 
-# O `.bashrc` como uma caixa de ferramentas
+## O `.bashrc` como uma caixa de ferramentas
 
 No início, talvez exista apenas:
 
@@ -829,7 +839,7 @@ E finalmente transformar aquilo em uma função.
 
 ---
 
-# Meu Bash, minhas regras
+## Meu Bash, minhas regras
 
 Personalizar o terminal não significa necessariamente instalar um tema cheio de efeitos, dezenas de plugins ou uma configuração gigantesca.
 
@@ -857,5 +867,3 @@ E que, com o tempo, começa a parecer menos como uma ferramenta de outra pessoa 
 No fim das contas, talvez essa seja uma das melhores coisas do Linux:
 
 > **você não precisa apenas aprender a usar o computador. Pode também ensiná-lo a trabalhar do seu jeito.**
-
-Se quiser seguir essa série no blog, um próximo artigo que encaixa muito bem seria **“Do `.bashrc` ao seu próprio comando: criando scripts Bash reutilizáveis”** — seria a evolução natural dessas funções para ferramentas mais completas.
