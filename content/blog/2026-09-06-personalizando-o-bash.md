@@ -10,7 +10,7 @@ tags:
   - bash
   - terminal
   - shell
-draft: true
+draft: false
 ---
 
 Existe uma diferença entre **usar o terminal** e **fazer o terminal trabalhar do seu jeito**.
