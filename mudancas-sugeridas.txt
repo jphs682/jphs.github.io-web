@@ -25,12 +25,12 @@ diário e menos de repositório de tutoriais.
 1. Problemas concretos (vale corrigir primeiro)
 ================================================================
 
-1.1 Espaço no título da home
+ok 1.1 Espaço no título da home
     content/_index.md tem:
         title: " Diário de um Computador"
     Esse espaço inicial aparece na aba do navegador e no <title>. Tirar.
 
-1.2 Menu "Search" em inglês
+ok 1.2 Menu "Search" em inglês
     hugo.yaml, item do menu principal:
         - name: Search
     Trocar para "Buscar" (o restante da interface já está em português).
@@ -41,7 +41,7 @@ diário e menos de repositório de tutoriais.
       - A viagem de um git commit (2026-09-03)
     Atualizar a contagem, a lista de temas e a seção "Próximos passos".
 
-1.4 Documentação anunciada, mas vazia
+ok 1.4 Documentação anunciada, mas vazia
     O menu tem "Documentação". content/docs/linux, programacao e redes estão
     vazios. Quem clica cai numa página que promete fichas que não existem.
 
@@ -103,7 +103,7 @@ diário e menos de repositório de tutoriais.
     Atualizar archetypes/default.md para já nascer no formato certo, com
     slug vazio e aliases: [].
 
-1.8 Arquivos soltos na raiz
+ok 1.8 Arquivos soltos na raiz
     - bash.md     rascunho de artigo sobre .bashrc (bom texto, lugar errado)
     - lista.txt   pauta de 50 ideias (já está no .gitignore)
 
@@ -114,7 +114,7 @@ diário e menos de repositório de tutoriais.
     lista.txt pode ficar fora do git mesmo. Se quiser versionar a pauta,
     melhor um content/blog/_pauta.md em draft, ou um arquivo em data/.
 
-1.9 Pastas vazias que não fazem nada
+ok 1.9 Pastas vazias que não fazem nada
     layouts/_default/, layouts/blog/, assets/, data/, static/, themes/
     estão vazias. Ou se usa, ou se documenta. themes/ não precisa existir
     (o Hextra entra pelo go.mod). static/ precisa existir quando entrar
