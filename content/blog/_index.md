@@ -3,10 +3,4 @@ title: "Diário de um Computador"
 description: "Crônicas, experiências e descobertas no mundo da tecnologia."
 ---
 
-Um diário de descobertas sobre computadores, Linux, programação e código aberto.
-
-Aqui ficam as histórias completas.
-
-> Algumas nasceram de uma dúvida.
-> Outras, de um erro.
-> E algumas começaram simplesmente porque eu queria saber como alguma coisa funcionava.
+As crônicas também aparecem na [página inicial]({{< relref "/" >}}). Esta listagem existe para quem chegou por um link antigo.
