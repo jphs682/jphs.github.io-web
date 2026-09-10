@@ -1,440 +1,151 @@
 Sugestões de mudanças — Diário de um Computador
 Projeto: jphs.github.io-web
-Data: 2026-09-06
+Atualizado: 2026-09-09  (primeira versão: 2026-09-06)
 
-Estas notas partem do estado atual do repositório (Hugo + Hextra, 11 crônicas
-publicadas, docs ainda vazias). Não é um backlog obrigatório: é um mapa do que
-já está bom, o que está quebrado ou inconsistente, e o que daria mais cara de
-diário e menos de repositório de tutoriais.
+Estas notas partem do estado atual do repositório (Hugo + Hextra, 12 crônicas
+publicadas, home listando o blog, docs ainda vazias). Não é um backlog
+obrigatório: é um mapa do que já está bom, o que ficou pela metade depois
+da home virar o diário, e o que ainda dá mais cara de diário.
+
+Como ler os marcadores:
+  ok     já feito
+  ~      feito pela metade
+  [ ]    ainda aberto
 
 
 ================================================================
-0. O que já está no caminho certo
+0. O que mudou desde 2026-09-06
 ================================================================
 
-- Tom das crônicas: começa na cena, depois entra no comando. Manter isso.
-- Front matter com description, categories, tags e draft.
-- aliases nos posts que já tiveram URL errada (GPG e logs).
-- i18n em pt-br.yaml (copyright, busca, tema).
-- Busca FlexSearch ligada.
-- Tema claro/escuro no sistema.
-- Deploy por GitHub Actions no Pages.
+Feito:
+  ok  Home lista as crônicas (layouts/home.html). Quem chega no site
+      cai no diário, sem clicar em "Blog".
+  ok  Menu sem "Blog" e sem "Documentação". Ficou: Início, Categorias,
+      Sobre, Buscar, GitHub.
+  ok  Espaço no título da home (content/_index.md).
+  ok  Item de menu "Search" → "Buscar".
+  ok  Artigo do Bash publicado
+      (content/blog/2026-09-06-personalizando-o-bash.md).
+  ok  Página Sobre um pouco mais pessoal (IFPE, o que o diário não é).
+  ok  /blog/_index.md avisa que a listagem também vive na home.
+
+Ainda 12 textos, não 11: o Bash saiu do rascunho da raiz e entrou no
+diário. O README continua falando em 9 artigos.
+
+O efeito colateral da home-diário: agora existem DUAS listagens iguais
+(/ e /blog), DUAS paginações (/page/2 e /blog/page/2) e o menu mobile
+mostra "Início > Diário de um Computador" apontando de novo para /blog.
+Isso é o próximo nó a desatar — ver seção 2.
 
 
 ================================================================
 1. Problemas concretos (vale corrigir primeiro)
 ================================================================
 
-ok 1.1 Espaço no título da home
-    content/_index.md tem:
-        title: " Diário de um Computador"
-    Esse espaço inicial aparece na aba do navegador e no <title>. Tirar.
+ok  1.1 Espaço no título da home
+    Já corrigido.
 
-ok 1.2 Menu "Search" em inglês
-    hugo.yaml, item do menu principal:
-        - name: Search
-    Trocar para "Buscar" (o restante da interface já está em português).
+ok  1.2 Menu "Search" em inglês
+    Já está "Buscar".
 
-1.3 README desatualizado
-    O README ainda fala em 9 artigos. Há 11:
-      - Git não é GitHub (2026-08-30)
-      - A viagem de um git commit (2026-09-03)
-    Atualizar a contagem, a lista de temas e a seção "Próximos passos".
+    1.3 README desatualizado  [ainda aberto]
+    O README ainda fala em 9 artigos. Há 12:
 
-ok 1.4 Documentação anunciada, mas vazia
-    O menu tem "Documentação". content/docs/linux, programacao e redes estão
-    vazios. Quem clica cai numa página que promete fichas que não existem.
+      2024-10-08  Permissões no Linux
+      2024-10-11  Compilar códigos
+      2024-10-11  GNU, Linux e o código aberto
+      2024-12-05  Criptografia GPG
+      2024-12-29  Variáveis de ambiente
+      2025-01-23  Monitoramento
+      2025-07-12  Logs (journald / syslog-ng)
+      2025-08-19  Mulheres no FOSS
+      2025-10-20  Análise combinatória
+      2026-08-30  Git não é GitHub
+      2026-09-03  A viagem de um git commit
+      2026-09-06  Personalizando o Bash
 
-    Duas saídas (escolher uma):
-      a) Escrever 3–5 fichas curtas e só então destacar o menu.
-      b) Enquanto estiver vazio, tirar "Documentação" do menu (a página pode
-         continuar no ar, só não no navbar).
+    Atualizar também:
+      - a tabela de seções (Início agora É o blog; Blog é só alias)
+      - a árvore (layouts/home.html existe; i18n/pt-br.yaml não está vazio)
+      - "Próximos passos" (vários itens da lista antiga já aconteceram)
+      - a contagem e a pauta
+
+~   1.4 Documentação anunciada, mas vazia
+    Saiu do menu — bom. A página /docs ainda existe e promete fichas
+    que não existem. Quem cai nela por busca, sitemap ou link antigo
+    vê pastas vazias com emoji.
+
+    Enquanto não houver ficha:
+      - no _index.md de docs, uma frase só: "caderno ainda vazio;
+        as histórias estão na página inicial"
+      - noindex nessa seção (build.noIndex: true no front matter,
+        se o Hextra respeitar; senão robots)
 
     Primeiras fichas naturais, extraídas dos próprios artigos:
-      docs/linux/permissoes.md      (espelho curto de chmod/chown)
+      docs/linux/permissoes.md
       docs/linux/journald.md
       docs/linux/variaveis-de-ambiente.md
+      docs/linux/bashrc.md
       docs/programacao/git-basico.md
-      docs/redes/ainda-vazio.md     (ou esperar a crônica de DNS/HTTP)
 
-1.5 Tags e categorias inconsistentes
-    O mesmo assunto aparece de dois jeitos, o que quebra a taxonomia:
+    1.5 Tags e categorias inconsistentes  [ainda o maior problema
+        de organização]
+    O mesmo assunto aparece de dois jeitos e quebra a taxonomia.
+    Hoje o site gera, entre outras:
 
-      código-aberto   e   codigo-aberto
-      programação     (com acento, ok, mas misturado com tags em inglês)
-      FOSS / foss     (Hugo normaliza, mas o rótulo fica feio)
+      /tags/codigo-aberto/     e  /tags/código-aberto/
+      /tags/foss/              (rótulo "FOSS" no post)
+      categoria "tecnologia"   (larga demais, não filtra)
 
-    Sugerido: padronizar em minúsculas, com hífen, sem acento nas tags
-    (URLs mais estáveis) e com acento só no título visível, se quiser.
+    Posts que misturam:
+      Git ≠ GitHub     tags: codigo-aberto
+                       categories: código-aberto
+      GNU/Linux        tags: código-aberto, FOSS
+      Mulheres FOSS    tags: FOSS, código-aberto
+                       categories: código-aberto, tecnologia
+      Análise combin.  categories: ..., tecnologia
 
-    Lista de tags canônicas para começar:
+    Sugerido — padronizar em minúsculas, com hífen, sem acento nas
+    tags (URLs estáveis). Acento só no título visível, se quiser.
+
+    Tags canônicas para começar:
       linux, git, github, gpg, chmod, journald, gcc, foss,
       codigo-aberto, software-livre, monitoramento, logs,
-      variaveis-de-ambiente, combinatoria, inclusao
+      variaveis-de-ambiente, combinatoria, inclusao, bash, shell
 
     Categorias canônicas (poucas, largas):
       linux, programacao, seguranca, codigo-aberto, redes, matematica
 
-    Evitar categoria "tecnologia" — é tão larga que não filtra nada.
+    Evitar categoria "tecnologia". Depois de unificar, conferir se
+    as pastas duplicadas em public/tags/ somem num build limpo
+    (hugo --cleanDestinationDir). Sem isso, o public/ local mente.
 
-1.6 Nomes de arquivo inconsistentes
-    Hoje misturam inglês, português, maiúsculas e minúsculas:
+    1.6 Nomes de arquivo inconsistentes
+    Ainda misturam inglês, português, maiúsculas e minúsculas:
 
       2024-10-08-Permissoes-Linux.md
       2025-08-19-Women-in-FOSS.md
       2026-08-30-Git-nao-e-GitHub-Uma-explicacao-narrativa-diferenca.md
       2026-09-03-a-viagem-de-um-git-commit.md
+      2026-09-06-personalizando-o-bash.md   ← este já está no padrão
 
-    Convenção já descrita no README, mas não seguida:
+    Convenção do README (não seguida):
       YYYY-MM-DD-titulo-curto.md   (minúsculas, sem acento, curto)
 
-    Ao renomear, usar aliases: para não quebrar links antigos. O post de GPG
-    já faz isso. Copiar o padrão.
+    Ao renomear, aliases: para não quebrar links. O post de GPG já
+    faz isso (inclusive o typo antigo criptgrafia). Copiar o padrão.
 
-1.7 Front matter irregular
-    Alguns posts usam date: 2024-10-08
-    Os dois mais novos usam date: '2026-08-30T19:34:26-03:00'
+    1.7 Front matter irregular
+    Alguns posts:  date: 2024-10-08
+    Os de git:     date: '2026-08-30T19:34:26-03:00'
     Alguns têm espaço depois de "categories:" / "tags:".
 
     Padronizar:
       date: 2026-08-30
       (hora só se importar para ordenação no mesmo dia)
 
-    Atualizar archetypes/default.md para já nascer no formato certo, com
-    slug vazio e aliases: [].
-
-ok 1.8 Arquivos soltos na raiz
-    - bash.md     rascunho de artigo sobre .bashrc (bom texto, lugar errado)
-    - lista.txt   pauta de 50 ideias (já está no .gitignore)
-
-    Mover bash.md para:
-      content/blog/YYYY-MM-DD-personalizando-o-bash.md
-      com draft: true
-
-    lista.txt pode ficar fora do git mesmo. Se quiser versionar a pauta,
-    melhor um content/blog/_pauta.md em draft, ou um arquivo em data/.
-
-ok 1.9 Pastas vazias que não fazem nada
-    layouts/_default/, layouts/blog/, assets/, data/, static/, themes/
-    estão vazias. Ou se usa, ou se documenta. themes/ não precisa existir
-    (o Hextra entra pelo go.mod). static/ precisa existir quando entrar
-    favicon/logo.
-
-
-================================================================
-2. Home, identidade e leitura
-================================================================
-
-2.1 A home ainda é um cartaz, não um diário
-    content/_index.md lista temas com emoji e uma citação. Não mostra
-    nenhum artigo. Quem chega pela primeira vez não vê o que você já
-    escreveu.
-
-    Usar os shortcodes do Hextra para:
-      - 3 cards dos últimos posts (hextra/feature-card ou lista)
-      - um bloco "Comece por aqui" com 3 crônicas âncora:
-          Git não é GitHub
-          Permissões no Linux
-          GNU, Linux e o código aberto
-      - um atalho para /blog e /about
-
-    O Hextra tem {{< hextra/hero-badge >}}, cards e {{< hextra/feature-grid >}}.
-    Vale uma home com herói curto + grade, em vez de só Markdown solto.
-
-2.2 Logo e favicon
-    static/ está vazio. O Pages até serve ícones porque o tema traz
-    fallback, mas o site não tem marca própria.
-
-    Colocar em static/:
-      favicon.ico, favicon.svg
-      images/logo.svg  e  images/logo-dark.svg
-
-    Depois, em hugo.yaml:
-      params.navbar.displayLogo: true
-      params.navbar.logo.path / dark
-
-    Um logotipo simples (terminal, prompt, ou as iniciais DC) combina
-    com o nome "Diário de um Computador".
-
-2.3 Navbar
-    - Ligar o logo (acima).
-    - GitHub do menu aponta para https://github.com/jphs682 (perfil).
-      Melhor apontar para o repositório do site, ou ter os dois:
-      ícone GitHub = perfil, e um "Editar" por página (ver 3.4).
-    - Cinco itens de texto + busca + GitHub é bastante para celular.
-      Se docs sair do menu até ter conteúdo, o navbar respira.
-
-2.4 Página Sobre
-    Está boa e curta. Dá para crescer um pouco sem virar currículo:
-      - uma linha sobre o IFPE / o curso
-      - o que este diário não é (não é tutorial corporativo, não é dump
-        de comandos)
-      - como sugerir pauta (issue no GitHub)
-      - foto opcional, se quiser cara de autor
-
-2.5 Listagem do blog
-    O índice em content/blog/_index.md só tem um parágrafo. O Hextra
-    já lista os posts; mesmo assim vale:
-      - um lead de 2 linhas
-      - params para mostrar data, descrição e tags na listagem
-      (params.page / displayDate, conforme a versão do Hextra)
-
-2.6 Posts relacionados
-    No fim de cada crônica, um bloco "Continua por aqui" com 2–3 links
-    manuais (ou related do Hugo). Exemplos naturais:
-
-      Permissões  →  GPG  →  "por que 777 é problema" (quando existir)
-      Git ≠ GitHub  →  viagem do commit  →  (próximo: branches/merge)
-      Logs  →  Monitoramento  →  (próximo: investigação de incidente)
-
-    Isso transforma 11 textos soltos numa leitura em sequência.
-
-2.7 Série editorial
-    lista.txt já descreve a série "Crônicas de um Computador #01…".
-    Se for seguir isso:
-      - criar a taxonomy series em hugo.yaml
-      - marcar os posts novos com series: ["cronicas-de-um-computador"]
-      - não renumerar os 11 antigos à força; começar a série nos próximos
-
-    Alternativa mais leve: um tag "cronica" e um índice em /docs ou /blog.
-
-
-================================================================
-3. Configuração Hugo / Hextra
-================================================================
-
-3.1 SEO básico que ainda falta
-    hugo.yaml não liga:
-
-      enableRobotsTXT: true
-      enableGitInfo: true          # "última modificação" verdadeiro
-
-    params:
-      images:                      # imagem padrão Open Graph
-        - images/og-default.png
-
-    O Hextra lê description (já existe) e author. Falta imagem social
-    (1200×630) para o link não nascer careca no WhatsApp/Mastodon.
-
-    Sitemap já sai no build. Conferir se o robots.txt aponta para ele.
-
-3.2 RSS
-    Hoje outputs.home só tem HTML e RSS. Vale também:
-
-      outputs:
-        home: [HTML, RSS]
-        section: [HTML, RSS]
-
-    Assim /blog/index.xml existe de verdade. Mencionar o feed no rodapé
-    e no Sobre ("este diário também é um feed").
-
-3.3 Markup
-    goldmark.renderer.unsafe: true está ligado. É comum em temas com
-    shortcode HTML, mas qualquer Markdown passado a publicar vira HTML
-    cru. Manter só se os shortcodes do Hextra exigirem; caso contrário,
-    desligar.
-
-    highlight.noClasses: false está certo (permite CSS próprio).
-
-3.4 editURL
-    params.editURL.enable: false
-    Ligar apontando para o repo:
-
-      params.editURL:
-        enable: true
-        base: "https://github.com/jphs682/jphs.github.io-web/edit/main/"
-
-    Combina com o tom do diário (texto vivo, correções bem-vindas) e
-    com a frase da página Sobre.
-
-3.5 Busca
-    tokenize: forward funciona, mas em português às vezes "permissão"
-    não acha "permissões". Testar tokenize: full. Se a busca ficar
-    barulhenta, voltar para forward.
-
-    O índice está em "content" — ok. Evitar indexar docs vazios.
-
-3.6 Idioma
-    defaultContentLanguage: pt-br está certo.
-    Se um dia entrar inglês, aí sim languages.en. Por enquanto um
-    idioma só é a decisão certa.
-
-3.7 Atualizar o Hextra
-    go.mod pina v0.12.3. Antes de um ciclo de conteúdo novo:
-
-      hugo mod get -u github.com/imfing/hextra
-      hugo mod tidy
-
-    Ler o changelog. Atualização de tema muda CSS e shortcodes.
-
-3.8 Copyright
-    i18n/pt-br.yaml tem: copyright: "© 2026 João Paulo."
-    Ano fixo envelhece. Preferir o parâmetro do tema (year atual) ou
-    "© 2024–2026 João Paulo".
-
-
-================================================================
-4. Conteúdo — o que escrever (e o que não escrever ainda)
-================================================================
-
-Há pauta demais em lista.txt (50 ideias). Sem recorte, o diário vira
-lista de desejos. Sugerido: uma fila curta, na voz que você já tem.
-
-4.1 Próximas 5 crônicas (ordem que conversa com o que já existe)
-
-  1. Personalizando o Bash
-     O rascunho já está em bash.md. Quase pronto. Só mover, revisar
-     o tom para ficar crônica (cena → arquivo → aliases/funções →
-     o que NÃO colocar no bashrc) e publicar.
-
-  2. O que acontece quando você digita ls
-     Está no README há tempo. É o texto-manifesto do diário.
-
-  3. Por que 777 parece solução e é problema
-     Continuação direta de Permissões. Pouca pesquisa nova, muito
-     ganho de série.
-
-  4. O que acontece quando você digita google.com
-     Abre a seção de redes, que hoje não tem nenhum post.
-
-  5. Hash não é criptografia
-     Continua GPG sem repetir GPG. Desfaz uma confusão comum.
-
-4.2 O que esperar para depois
-    - Boot do Linux, OOM killer, inodes: bons, mas longos.
-    - Dijkstra / PageRank: só se a série de matemática for mesmo
-      um eixo (hoje há um único post).
-    - i-Educar / software livre e dinheiro: ótimo, mas pede opinião
-      mais madura; melhor depois de 3–4 crônicas novas.
-
-4.3 Fichas de docs (não crônicas)
-    Uma ficha = 20–80 linhas, comandos, tabela, "veja também a crônica".
-    Não reescrever o artigo. Quem chega pela docs quer consulta; quem
-    chega pelo blog quer história.
-
-4.4 Imagens nos posts
-    Nenhum artigo tem figura. Não precisa ilustrar tudo. Dois tipos
-    que pagam o esforço:
-      - um diagrama simples (viagem do commit, caminho do DNS)
-      - um recorte de terminal (SVG ou screenshot com fundo do tema)
-
-    Guardar em static/images/blog/<slug>/ e referenciar com
-    ![alt descritivo](images/blog/...). Alt em português, sempre.
-
-4.5 Revisão de tom nos títulos antigos
-    Alguns títulos ainda soam curso ("Controle Total: Dominando
-    Permissões", "Desvendando a Criptografia GPG"). Os novos já estão
-    no tom certo ("Aquela vez em que descobri que Git não era GitHub").
-
-    Não precisa reescrever os antigos agora. Se for, mudar só o title
-    (URL fica, ou usa aliases). A description de cada um já está boa.
-
-
-================================================================
-5. Acessibilidade, UX e CSS
-================================================================
-
-5.1 CSS próprio
-    assets/ está vazio. Quando logo, tipografia ou largura da crônica
-    precisarem de ajuste, criar:
-
-      assets/css/custom.css
-
-    e apontar no Hextra (params.customCss ou o equivalente da versão).
-    Não copiar o CSS inteiro do tema.
-
-5.2 Tipografia da crônica
-    Textos longos (variáveis, commit, permissões) pedem:
-      - measure ~65–75 caracteres
-      - hierarquia h2/h3 visível
-      - blocos de código com overflow-x
-    Testar no celular: vários posts têm blocos de terminal longos.
-
-5.3 404
-    O tema traz um 404 genérico. Uma página própria em
-    layouts/404.html (ou content com layout) com a frase
-    "Um computador nunca está realmente pronto" + busca + 3 posts
-    recentes fica com a cara do diário.
-
-5.4 Acessibilidade
-    - Contraste no tema escuro, principalmente código.
-    - Não usar emoji como único rótulo (home e docs usam 🐧💻…).
-      Manter o texto ao lado, como já está.
-    - skipToContent já está no i18n. Conferir se o tema emite o link.
-
-
-================================================================
-6. Infra, CI e repositório
-================================================================
-
-6.1 Workflow .github/workflows/hugo.yml
-    O que melhorar:
-
-    - Pin de actions com SHA ou, no mínimo, major recente
-      (checkout@v4, configure-pages@v5, deploy-pages@v5 — ok por agora).
-    - Instalar Go de verdade. Hugo modules baixam o Hextra; sem Go
-      a build quebra em runner limpo em alguns cenários.
-        uses: actions/setup-go@v5
-        with:
-          go-version-file: go.mod
-    - Dart Sass via `sudo snap install dart-sass` é lento e, neste
-      projeto, provavelmente inútil (não há SCSS próprio). Tirar até
-      precisar.
-    - Cache do módulo Hugo:
-        HUGO_CACHEDIR já está. Adicionar cache do diretório de módulos.
-    - Job de preview em pull_request (só hugo --minify, sem deploy)
-      para não publicar rascunho quebrado.
-    - concurrency cancel-in-progress: false no Pages é o padrão da
-      GitHub. Manter.
-
-    Atenção: o passo de build usa
-      --baseURL "${{ steps.pages.outputs.base_url }}/"
-    Isso é o certo para project pages. Não hardcodar a URL no CI.
-
-6.2 .gitignore
-    Hoje:
-      /public/
-      /.hugo_build.lock
-      lista.txt
-
-    Completar:
-      /resources/_gen/
-      .hugo_build.lock
-      *.swp
-      .DS_Store
-      /node_modules/
-
-    bash.md, se permanecer na raiz, também deveria ser ignorado ou
-    movido (ver 1.8).
-
-6.3 LICENSE
-    O README já admite que não há licença. Sugerido dual, comum em
-    blogs de código aberto:
-
-      - MIT            para layouts, config, CSS, workflow
-      - CC BY-SA 4.0   para o Markdown em content/
-
-    Um LICENSE na raiz + um parágrafo no README / Sobre.
-
-6.4 Segurança do conteúdo
-    Não colar chaves, .env, saídas de journalctl com hostname real,
-    e-mails de terceiros. O artigo de variáveis já ensina o perigo;
-    o repo precisa seguir o próprio conselho.
-
-6.5 go 1.27.0 no go.mod
-    Conferir se essa versão é a que o CI e a máquina local realmente
-    usam. go 1.27 pode ser um typo de 1.22/1.23/1.24, dependendo da
-    data do arquivo. hugo version e go version locais devem bater
-    com o README (hoje: Hugo v0.165.0+extended).
-
-
-================================================================
-7. Organização editorial do repo
-================================================================
-
-7.1 Um archetype melhor
-    archetypes/default.md gera título a partir do nome do arquivo
-    (Title Case em inglês: "A Viagem De Um Git Commit"). Melhor:
+    Atualizar archetypes/default.md — ainda gera Title Case em inglês
+    a partir do nome do arquivo ("A Viagem De Um Git Commit"):
 
       ---
       title: ""
@@ -445,56 +156,446 @@ lista de desejos. Sugerido: uma fila curta, na voz que você já tem.
       draft: true
       ---
 
-    E um segundo archetype para docs:
+ok  1.8 Arquivos soltos na raiz
+    bash.md virou o artigo publicado. lista.txt continua na raiz e
+    no .gitignore — ok.
 
-      hugo new content/docs/linux/foo.md --kind docs
+    1.9 Pastas vazias / árvore que o README descreve errado
+    layouts/ agora tem home.html (não está vazio).
+    i18n/ tem pt-br.yaml (não está vazio).
+    assets/, data/, static/, themes/ — conferir no disco; o README
+    ainda as lista como se fizessem parte do fluxo diário.
 
-7.2 data/ para coisas que não são crônica
-    data/pauta.yaml com a fila das 5 próximas, status e série.
-    Assim lista.txt não precisa viver na raiz.
-
-7.3 CONTRIBUTING curto
-    15 linhas: como rodar, como nomear arquivo, draft: true até
-    revisar, não commitar public/.
-
-7.4 Issues como pauta
-    Uma issue por crônica futura, label "pauta". Quem lê o GitHub
-    entende que o diário está vivo.
+    Novo: o .gitignore tem `*.txt`. Isso esconde este próprio arquivo
+    e qualquer nota útil. Preferir ignorar só lista.txt (já estava)
+    e tmp/, não todo .txt.
 
 
 ================================================================
-8. Prioridade sugerida (se for fazer de verdade)
+2. Home, identidade e leitura
+    (o miolo novo, depois da home virar o diário)
+================================================================
+
+~   2.1 A home já é o diário — falta terminar o corte
+    layouts/home.html pagina site.GetPage "/blog" na raiz. Funciona.
+    O que ficou estranho:
+
+    a) /blog continua existindo como listagem quase idêntica.
+       Título da aba: "Diário de um Computador – Diário de um Computador".
+       Duas paginações: /page/2/ e /blog/page/2/.
+       Dois RSS conceituais para a mesma fila.
+
+       Escolher uma:
+         A) /blog redireciona para /  (aliases em content/blog/_index.md
+            não redirecionam a seção; usar um layout que dê
+            http 301, ou um netlify/pages trick — no GitHub Pages
+            o jeito Hugo é aliases no DESTINO, não na origem).
+            Mais simples: deixar /blog no ar, mas com título
+            "Arquivo" e um lead de uma linha + link para /.
+         B) Tirar a paginação de /blog (pagerSize enorme) para não
+            competir com a home.
+
+    b) Canonical da página 2 da home aponta para /  (não para
+       /page/2/). Google pode tratar page 2 como duplicata da home.
+       Conferir rel=canonical e rel=prev/next no pager do Hextra.
+
+    c) pagerSize: 10 com 12 posts deixa a página 2 com 2 crônicas.
+       Ou sobe para 12 (uma página só, por enquanto) ou desce para
+       6 (duas páginas densas). 10 é o pior dos dois.
+
+    d) layouts/home.html tem um <br> vazio e breadcrumb desligado
+       à toa. Tem também duas colunas fantasmas de 16rem (sidebar
+       placeholder + div direita hx:w-64) que estreitam o texto
+       no desktop. A home de um diário não precisa do gutter de
+       docs do Hextra. disableSidebar já está true; dá para não
+       reservar a coluna.
+
+    e) O H1 "Diário de um Computador" + o título da navbar repetem
+       o mesmo nome duas vezes acima da dobra. Uma das duas basta.
+       Na home, um lead curto (o que já está no _index.md) e ir
+       direto para as crônicas.
+
+    2.2 "Comece por aqui" ainda não existe
+    A home agora mostra os 10 mais novos. Quem chega pela primeira
+    vez não sabe por qual crônica começar — cai no Bash, que é o
+    mais recente, não o melhor cartão de visitas.
+
+    Três âncoras, fixas, acima da listagem cronológica:
+
+      Git não é GitHub
+      Permissões no Linux
+      GNU, Linux e o código aberto
+
+    Pode ser Markdown simples em content/_index.md (três links)
+    ou um bloco no home.html. Não precisa de feature-card.
+
+    2.3 Navbar
+    - "Início" é redundante: o título da esquerda já volta para /.
+      Em celular o hamburger mostra Início + Categorias + Sobre;
+      no desktop dá para viver sem o item Início.
+    - No menu mobile, o Hextra ainda lista a seção /blog como
+      filha de Início, com o mesmo título do site. Quem não sabe
+      que /blog é leftover clica e vê a listagem de novo.
+      layout: home / cascade no blog, ou sidebar.default: false.
+    - GitHub do menu aponta para https://github.com/jphs682
+      (perfil). Melhor o repositório do site, ou os dois:
+      ícone = perfil, e editURL por página (ver 3.4).
+    - Logo: params.navbar.displayLogo ainda é false. public/images/
+      tem logo.svg e logo-dark.svg (provavelmente do tema). Se for
+      marca própria, ligar; se for fallback do Hextra, desenhar um
+      prompt / DC e aí ligar.
+
+    2.4 Página Sobre
+    Está boa. Dá para um parágrafo só:
+      - link para o feed (quando o RSS da home estiver visível)
+      - "como sugerir pauta" (issue no GitHub) — a frase de correção
+        já existe; falta o caminho da pauta nova
+
+    2.5 Listagem: data + tags ok, falta hierarquia
+    Cada item é: título, tags, description, "Ler mais →", data.
+    A data está por último e com opacity-50. Em diário, a data
+    deveria vir logo abaixo do título (ou ao lado). "Ler mais"
+    compete com o título, que já é link. Duas âncoras para o
+    mesmo URL. Sugerido: título + data + tags + resumo; o título
+    sozinho basta como link. Manter "Ler mais" só se quiser
+    âncora explícita no teclado/leitor de tela — nesse caso o
+    título pode não ser <a>, ou o "Ler mais" fica aria-hidden.
+
+    2.6 Posts relacionados
+    Continua valendo. No fim de cada crônica, "Continua por aqui"
+    com 2–3 links. Agora com o Bash na fila:
+
+      Permissões  →  GPG  →  (próximo: por que 777 é problema)
+      Git ≠ GitHub  →  viagem do commit  →  (próximo: branches)
+      Logs  →  Monitoramento
+      Variáveis de ambiente  →  Personalizando o Bash
+
+    related do Hugo (related: em hugo.yaml) ou um bloco Markdown
+    manual no fim dos posts-chave. Manual é mais fiel à série.
+
+    2.7 Série editorial
+    lista.txt descreve "Crônicas de um Computador #01…".
+    Se for seguir:
+      - taxonomy series em hugo.yaml
+      - posts novos com series: ["cronicas-de-um-computador"]
+      - não renumerar os 12 antigos à força
+
+    Alternativa mais leve (recomendada agora): não criar taxonomy.
+    Um bloco "Comece por aqui" na home já dá identidade. Série
+    numerada só quando o ritmo de publicação estiver estável.
+
+    2.8 404 ainda é o genérico do Hextra, em inglês
+    "This page could not be found."
+    layouts/404.html com:
+      a frase "Um computador nunca está realmente pronto."
+      um campo de busca (ou link para /)
+      3 posts recentes
+    Combina com o tom do Sobre.
+
+    2.9 Categorias
+    A página /categories existe e está no menu. A lista do Hextra
+    é seca (nome + contagem). Com "tecnologia" e "código-aberto"
+    duplicado por acento, a página mente. Primeiro unificar tags
+    (1.5); depois, se ainda parecer pobre, um lead de uma linha
+    por categoria em content/categories/<nome>/_index.md.
+
+
+================================================================
+3. Configuração Hugo / Hextra
+================================================================
+
+    3.1 SEO básico que ainda falta
+    hugo.yaml não liga:
+
+      enableRobotsTXT: true
+      enableGitInfo: true
+
+    params:
+      images:
+        - images/og-default.png
+
+    Sem imagem Open Graph, o link no WhatsApp/Mastodon nasce
+    careca. 1200×630, com o nome do diário e um prompt.
+
+    Sitemap já sai no build. robots.txt precisa apontar para ele.
+
+    3.2 RSS
+    outputs.home já tem HTML e RSS — a home-diário ganhou feed
+    de graça. Falta:
+
+      outputs:
+        home: [HTML, RSS]
+        section: [HTML, RSS]
+
+    Mencionar o feed no rodapé e no Sobre
+    ("este diário também é um feed": /index.xml).
+    Hoje o footer só tem "© 2026 João Paulo." e o seletor de tema.
+
+    3.3 Markup
+    goldmark.renderer.unsafe: true. Manter só se os shortcodes
+    do Hextra exigirem; senão desligar.
+
+    3.4 editURL
+    params.editURL.enable: false
+    Ligar:
+
+      params.editURL:
+        enable: true
+        base: "https://github.com/jphs682/jphs.github.io-web/edit/main/"
+
+    Combina com o tom ("escreva se tiver um erro") e com a
+    página Sobre.
+
+    3.5 Busca
+    tokenize: forward. Em português, "permissão" pode não achar
+    "permissões". Testar tokenize: full; se ficar barulhenta,
+    voltar. Não indexar /docs enquanto estiver vazio.
+
+    3.6 Idioma
+    defaultContentLanguage: pt-br está certo. Um idioma só.
+
+    3.7 Atualizar o Hextra
+    go.mod pina v0.12.3. Antes de um ciclo de conteúdo novo:
+
+      hugo mod get -u github.com/imfing/hextra
+      hugo mod tidy
+
+    Ler o changelog. Home customizada (layouts/home.html) pode
+    quebrar se o tema mudar o pager ou os partials.
+
+    3.8 Copyright
+    i18n: "© 2026 João Paulo."
+    Ano fixo envelhece. "© 2024–2026 João Paulo" ou o parâmetro
+    de ano atual do tema.
+
+    3.9 permalinks / slug
+    As URLs dos posts ainda carregam a data
+    (/blog/2026-09-06-personalizando-o-bash/). Está ok. Se um
+    dia quiser URLs curtas, slug: no front matter + aliases
+    para a URL antiga. Não mudar as 12 de uma vez.
+
+
+================================================================
+4. Conteúdo — o que escrever (e o que não escrever ainda)
+================================================================
+
+Há pauta demais em lista.txt (50 ideias). Sem recorte, o diário
+vira lista de desejos. Fila curta, na voz que você já tem.
+
+    4.1 Próximas 4 crônicas (o Bash já saiu da fila)
+
+      1. O que acontece quando você digita ls
+         Está no README há tempo. É o texto-manifesto do diário.
+
+      2. Por que 777 parece solução e é problema
+         Continuação direta de Permissões. Pouca pesquisa nova.
+
+      3. O que acontece quando você digita google.com
+         Abre redes, que hoje não tem nenhum post.
+
+      4. Hash não é criptografia
+         Continua GPG sem repetir GPG.
+
+    4.2 O que esperar para depois
+    - Boot do Linux, OOM killer, inodes: bons, mas longos.
+    - Dijkstra / PageRank: só se matemática for mesmo um eixo
+      (hoje há um único post).
+    - i-Educar / software livre e dinheiro: ótimo, pede opinião
+      mais madura; depois de 3–4 crônicas novas.
+    - Continuação natural do Git: branches, merge, o que o
+      GitHub faz que o Git não faz (já plantado em Git ≠ GitHub).
+
+    4.3 Fichas de docs (não crônicas)
+    Uma ficha = 20–80 linhas, comandos, tabela, "veja também a
+    crônica". Quem chega pela docs quer consulta; quem chega
+    pela home quer história.
+
+    4.4 Imagens nos posts
+    Nenhum artigo tem figura. Dois tipos que pagam o esforço:
+      - um diagrama (viagem do commit, caminho do DNS)
+      - um recorte de terminal (SVG ou screenshot do tema)
+
+    static/images/blog/<slug>/ e alt em português.
+
+    4.5 Revisão de tom nos títulos
+    Os novos já estão no tom certo ("Aquela vez em que descobri
+    que Git não era GitHub", "A viagem de um arquivo até virar
+    um commit"). Os antigos ainda soam curso:
+
+      "Controle Total: Dominando Permissões no Linux"
+      "Desvendando a Criptografia GPG"
+      "Personalizando o Bash: Transformando o Terminal em uma
+       Ferramenta Pessoal"   ← o mais novo, mas ainda tutorial
+
+    Não precisa reescrever agora. Se for, mudar só o title
+    (URL fica). A description de cada um já está boa.
+
+    4.6 O Bash publicado pede um ajuste de tom, não de fato
+    O texto começa em lista de comandos (cd, ls, mkdir…). A
+    voz das outras crônicas começa numa cena. Na revisão,
+    abrir com o .bashrc como "a casa que o terminal arruma
+    toda vez que você chega" e só então cair nos aliases.
+
+
+================================================================
+5. Acessibilidade, UX e CSS
+================================================================
+
+    5.1 CSS próprio
+    public/css/custom.css no build está vazio. Quando logo,
+    measure da crônica ou a home precisarem de ajuste:
+
+      assets/css/custom.css
+
+    e o parâmetro do Hextra (params.customCSS / customCss,
+    conforme a versão). Não copiar o CSS inteiro do tema.
+
+    5.2 Tipografia da crônica
+    Textos longos (variáveis, commit, permissões, bash) pedem:
+      - measure ~65–75 caracteres
+      - hierarquia h2/h3 visível
+      - blocos de código com overflow-x
+    Testar no celular. A home com as duas colunas fantasmas
+    (2.1.d) aperta isso no desktop também.
+
+    5.3 Acessibilidade
+    - Contraste no tema escuro, principalmente código.
+    - Não usar emoji como único rótulo (docs ainda usa 🐧💻).
+    - skipToContent já está no i18n e o tema emite o link — ok.
+    - "Ler mais →" como único texto visível do segundo link
+      (2.5) é fraco para leitor de tela; o aria-label já inclui
+      o título — manter isso se o link ficar.
+
+    5.4 Footer
+    Só tema + copyright. Cabe:
+      - link do RSS
+      - link do Sobre
+      - a frase-assinatura, uma vez, pequena
+
+
+================================================================
+6. Infra, CI e repositório
+================================================================
+
+    6.1 Workflow .github/workflows/hugo.yml
+    Ainda:
+
+    - Pin de actions com SHA, ou no mínimo major recente
+      (checkout@v4, configure-pages@v5, deploy-pages@v5).
+    - Instalar Go. Hugo modules baixam o Hextra; sem Go a
+      build quebra em runner limpo em alguns cenários.
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+    - Dart Sass via `sudo snap install dart-sass` é lento e,
+      neste projeto, inútil (não há SCSS próprio). Tirar.
+    - Cache do módulo Hugo além de HUGO_CACHEDIR.
+    - Job de preview em pull_request (hugo --minify, sem deploy).
+    - --baseURL "${{ steps.pages.outputs.base_url }}/" está certo.
+      Não hardcodar a URL no CI.
+    - hugo --minify --cleanDestinationDir no CI, para não
+      publicar pastas-fantasma de URLs antigas.
+
+    6.2 .gitignore
+    Tem um `*.txt` largo demais (esconde este arquivo).
+    Completar o que falta e apertar o que sobra:
+
+      /public/
+      /resources/_gen/
+      .hugo_build.lock
+      lista.txt
+      *.swp
+      .DS_Store
+      /node_modules/
+
+    Não ignorar mudancas-sugeridas.txt se quiser versionar a
+    pauta de mudanças. Se não quiser, um data/pauta.yaml
+    versionado é melhor que um .txt solto.
+
+    6.3 LICENSE
+    O README admite que não há licença. Dual, comum em blogs:
+
+      - MIT            para layouts, config, CSS, workflow
+      - CC BY-SA 4.0   para o Markdown em content/
+
+    LICENSE na raiz + um parágrafo no README / Sobre.
+
+    6.4 Segurança do conteúdo
+    Não colar chaves, .env, journalctl com hostname real,
+    e-mails de terceiros. O artigo de variáveis já ensina;
+    o repo precisa seguir o próprio conselho.
+
+    6.5 go 1.27.0 no go.mod
+    Conferir se CI e máquina local realmente usam isso.
+    Pode ser typo de 1.22/1.23/1.24. hugo version e go version
+    devem bater com o README (hoje: Hugo v0.165.0+extended).
+
+    6.6 public/ local é um mentiroso
+    O diretório public/ mistura o build atual com URLs antigas
+    (slug pelo título, typo criptgrafia, logs com acento).
+    Nunca inspecionar SEO/rotas olhando public/ sem um
+    hugo --cleanDestinationDir antes. Melhor nem versionar
+    (já está no gitignore).
+
+
+================================================================
+7. Organização editorial do repo
+================================================================
+
+    7.1 Archetype melhor — ver 1.7.
+
+    7.2 data/ para o que não é crônica
+    data/pauta.yaml com a fila das 4 próximas, status e série.
+    Assim lista.txt não precisa viver na raiz.
+
+    7.3 CONTRIBUTING curto
+    15 linhas: como rodar, como nomear arquivo, draft: true
+    até revisar, não commitar public/.
+
+    7.4 Issues como pauta
+    Uma issue por crônica futura, label "pauta".
+
+
+================================================================
+8. Prioridade sugerida (recorte de 2026-09-09)
 ================================================================
 
 Agora (meia hora, sem escrever artigo):
-  [ ] Tirar o espaço do título da home
-  [ ] Traduzir o item Search do menu
-  [ ] Mover bash.md para content/blog/ com draft: true
-  [ ] Atualizar o README (11 artigos, não 9)
-  [ ] Completar .gitignore
-  [ ] Tirar Documentação do menu ou escrever a primeira ficha
+  [ ] Atualizar o README (12 artigos, home = diário, árvore)
+  [ ] Unificar codigo-aberto / código-aberto / FOSS  (1.5)
+  [ ] Tirar categoria "tecnologia"
+  [ ] pagerSize 6 ou 12 — não 10
+  [ ] Título de /blog → "Arquivo" (ou equivalente), para não
+      competir com a home
+  [ ] Tirar o <br> vazio e as colunas fantasmas da home
+  [ ] .gitignore: remover `*.txt` largo
+  [ ] enableRobotsTXT: true
 
 Esta semana:
-  [ ] Home com os últimos posts / "comece por aqui"
-  [ ] enableRobotsTXT + RSS da seção blog
-  [ ] Favicon + logo no static/
-  [ ] Padronizar tags (codigo-aberto vs código-aberto)
+  [ ] "Comece por aqui" na home (3 âncoras)
+  [ ] Data ao lado do título na listagem; "Ler mais" só se
+      fizer falta
+  [ ] 404 em português, com a frase do diário
   [ ] Ligar editURL
-  [ ] Publicar o artigo do Bash
+  [ ] RSS no rodapé
+  [ ] Favicon/logo próprios + displayLogo, se a marca existir
+  [ ] Padronizar date: no front matter e o archetype
 
 Este mês:
   [ ] 3 crônicas da fila (ls, 777, google.com)
-  [ ] 3 fichas em docs/linux
+  [ ] 3 fichas em docs/linux  — só então pensar em devolver
+      Documentação ao menu
   [ ] LICENSE
-  [ ] 404 com a cara do diário
   [ ] Imagem Open Graph
   [ ] Go + cache no workflow; tirar dart-sass
+  [ ] Related posts nos 4 eixos (git, permissões, logs, bash)
 
 Quando o diário estiver estável:
   [ ] Série numerada
-  [ ] Related posts
   [ ] Atualizar Hextra
   [ ] Diagramas nos posts longos (commit, DNS)
+  [ ] Revisão de tom dos títulos antigos
+  [ ] URLs sem data (slug + aliases), se ainda incomodar
 
 
 ================================================================
@@ -502,13 +603,19 @@ Quando o diário estiver estável:
 ================================================================
 
 - O nome "Diário de um Computador".
+- A home como listagem das crônicas. Esse era o clique que
+  faltava; não voltar para o cartaz com botão.
 - O idioma único em pt-br.
 - Hextra (não vale migrar de tema agora).
-- GitHub Pages + Actions (simples e suficiente).
+- GitHub Pages + Actions.
 - O hábito de aliases quando a URL muda.
-- A frase de fechamento: "Um computador nunca está realmente pronto."
-  Ela já é identidade. Usar na home, no 404 e no Sobre, não em todo
-  parágrafo.
+- A frase de fechamento: "Um computador nunca está realmente
+  pronto." Usar na home (uma vez), no 404 e no Sobre — não em
+  todo parágrafo.
+- Manter /blog/ nas URLs dos posts. Mudar o endereço de 12
+  crônicas de uma vez só para "ficar mais limpo" é vaidade
+  cara. aliases existem para o contrário: não quebrar o que
+  já foi compartilhado.
 
 
 Fim.
