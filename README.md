@@ -38,7 +38,7 @@ Seções atuais:
 | Documentação | `content/docs/` | Caderno de referência (ainda em construção) |
 | Sobre | `content/about/` | Quem escreve e por quê |
 
-Há 9 artigos publicados, cobrindo permissões no Linux, compilação, GNU/Linux e código aberto, GPG, variáveis de ambiente, monitoramento, logs, mulheres no FOSS e análise combinatória.
+Há vários artigos publicados, cobrindo permissões no Linux, compilação, GNU/Linux e código aberto, GPG, variáveis de ambiente, monitoramento, logs, mulheres no FOSS e análise combinatória.
 
 ---
 
@@ -262,21 +262,10 @@ O que ainda falta, agora que o deploy, a busca e o Sobre já foram ajustados:
 - Listar os últimos artigos na home com os shortcodes do Hextra.
 - Usar `slug:` no front matter se quiser URLs sem a data (`aliases` para não quebrar links antigos).
 - Colocar favicon e logo em `static/`.
-- Adicionar uma `LICENSE` (MIT para o código, CC BY-SA para os textos, se for o caso).
 - Ligar `enableRobotsTXT: true` e, se quiser, Open Graph.
-
-Pauta natural para o tom do diário:
-
-1. O que acontece quando você digita `ls`
-2. O que acontece quando o Linux liga
-3. A vida de um processo
-4. Por que `777` parece solução e é problema
-5. O que acontece quando você digita `google.com`
 
 ---
 
 ## Licença e contato
-
-O código do site ainda não declara uma licença. O tema Hextra é MIT.
 
 Dúvidas, sugestões de pauta ou correções: abra uma issue no repositório ou escreva para `jphs@discente.ifpe.edu.br`.
