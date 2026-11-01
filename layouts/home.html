@@ -73,12 +73,13 @@
                 (dict "name" "Código aberto" "slug" "código-aberto" "symbol" "{ }" "description" "Software e comunidade")
               -}}
               {{- range $categories }}
-                {{- $term := site.GetPage (printf "/categories/%s" .slug) -}}
+                {{- $category := . -}}
+                {{- $term := site.GetPage (printf "/categories/%s" $category.slug) -}}
                 {{- with $term }}
                   <a class="home-category" href="{{ .RelPermalink }}">
-                    <span class="home-category-symbol" aria-hidden="true">{{ $.symbol }}</span>
+                    <span class="home-category-symbol" aria-hidden="true">{{ $category.symbol }}</span>
                     <span>
-                      <span class="home-category-name">{{ $.name }}</span><br />
+                      <span class="home-category-name">{{ $category.name }}</span><br />
                       <span class="home-category-count">{{ len .Pages }} publicação(ões)</span>
                     </span>
                   </a>
