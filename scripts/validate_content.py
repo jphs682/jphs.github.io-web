@@ -30,11 +30,11 @@ def validate_front_matter() -> None:
         fail("Nenhum artigo Markdown foi encontrado em content/blog/.")
         return
 
-    required = ("title", "date", "description", "draft")
+    required = ("title", "date", "description", "categories", "tags", "draft")
     for path in posts:
         relative = path.relative_to(ROOT)
         text = path.read_text(encoding="utf-8")
-        match = re.match(r"^---\\s*\\n(.*?)\\n---(?:\\n|$)", text, re.DOTALL)
+        match = re.match(r"^---\s*\n(.*?)\n---(?:\n|$)", text, re.DOTALL)
         if not match:
             fail(f"{relative}: front matter YAML ausente ou delimitadores inválidos.")
             continue
@@ -140,7 +140,7 @@ def validate_generated_links() -> None:
         current_url = urljoin(BASE_URL, page_relative)
         for raw_link in parser.links:
             link = raw_link.strip()
-            if not link or link.startswith(("#", "data:", "mailto:", "tel:", "javascript:")):
+            if not link or link.startswith(("data:", "mailto:", "tel:", "javascript:")):
                 continue
 
             absolute = urljoin(current_url, link)
