@@ -1,5 +1,6 @@
 ---
 title: "Sobre o Diário"
+description: "Conheça o Diário de um Computador, seus temas e a proposta de registrar estudos e descobertas sobre Linux, programação e tecnologia."
 ---
 
 O Diário de um Computador é um espaço dedicado a registrar estudos, experiências e descobertas sobre tecnologia.
