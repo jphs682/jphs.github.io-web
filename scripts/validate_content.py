@@ -137,7 +137,7 @@ def validate_generated_links() -> None:
     site_host = urlparse(BASE_URL).netloc
     for page, parser in parsed_pages.items():
         page_relative = page.relative_to(PUBLIC_DIR.resolve()).as_posix()
-        current_url = urljoin("https://local.test/", page_relative)
+        current_url = urljoin(BASE_URL, page_relative)
         for raw_link in parser.links:
             link = raw_link.strip()
             if not link or link.startswith(("#", "data:", "mailto:", "tel:", "javascript:")):
