@@ -1,38 +1,123 @@
 {{ define "main" }}
-  {{- $readMore := (T "readMore") | default "Read more →" -}}
+  {{- $readMore := (T "readMore") | default "Continuar lendo →" -}}
   {{- $blog := site.GetPage "/blog" -}}
-  {{- $pages := $blog.RegularPages.ByDate.Reverse -}}
+  {{- $pages := slice -}}
+  {{- with $blog -}}
+    {{- $pages = .RegularPages.ByDate.Reverse -}}
+  {{- end -}}
   {{- $pagerSize := site.Params.blog.list.pagerSize | default 10 -}}
-  {{- $paginator := .Paginate $pages $pagerSize -}}
+  {{- $latest := false -}}
+  {{- if gt (len $pages) 0 -}}
+    {{- $latest = index $pages 0 -}}
+  {{- end -}}
+  {{- $remaining := slice -}}
+  {{- if gt (len $pages) 1 -}}
+    {{- $remaining = after 1 $pages -}}
+  {{- end -}}
+  {{- $paginator := .Paginate $remaining $pagerSize -}}
   <div class="hx:mx-auto hx:flex hextra-max-page-width">
     {{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" true) }}
-    <article class="hx:w-full hx:break-words hx:flex hx:min-h-[calc(100vh-var(--navbar-height))] hx:min-w-0 hx:justify-center hx:pb-8 hx:pr-[calc(env(safe-area-inset-right)-1.5rem)]">
-      <main id="content" class="hx:w-full hx:min-w-0 hextra-max-content-width hx:px-6 hx:pt-4 hx:md:px-12">
-        {{ partial "breadcrumb.html" (dict "page" . "enable" false) }}
-        <br class="hx:mt-1.5 hx:text-sm" />
-        {{ if .Title }}<h1 class="hx:text-center hx:mt-2 hx:text-4xl hx:font-bold hx:tracking-tight hx:text-slate-900 hx:dark:text-slate-100">{{ .Title }}</h1>{{ end }}
-        <div class="content">{{ .Content }}</div>
-        {{- range $paginator.Pages }}
-          <div class="hx:mb-10">
-            <h3><a style="color: inherit; text-decoration: none;" class="hx:block hx:font-semibold hx:mt-8 hx:text-2xl " href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-            {{ if site.Params.blog.list.displayTags }}
-              <div class="hx:text-sm hx:leading-7">
-                {{ partial "tags.html" (dict "context" .) }}
-              </div>
-            {{ end }}
-            <p class="hx:opacity-80 hx:mt-4 hx:leading-7">{{- partial "utils/page-description" . -}}</p>
-            <p class="hx:opacity-80 hx:mt-1 hx:leading-7">
-              <a class="hx:text-[color:hsl(var(--primary-hue),100%,50%)] hx:underline hx:underline-offset-2 hx:decoration-from-font" href="{{ .RelPermalink }}" aria-label="{{ printf "%s %s" $readMore .Title }}">
-                {{- $readMore -}}
-              </a>
-            </p>
-            <p class="hx:opacity-50 hx:text-sm hx:mt-4 hx:leading-7">{{ partial "utils/format-date" .Date }}</p>
-          </div>
-        {{ end -}}
+    <article class="hx:w-full hx:break-words hx:flex hx:min-h-[calc(100vh-var(--navbar-height))] hx:min-w-0 hx:justify-center hx:pb-12 hx:pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+      <main id="content" class="hx:w-full hx:min-w-0 hextra-max-content-width hx:px-6 hx:pt-5 hx:md:px-12">
+        <div class="home-editorial">
+          <section class="home-hero" aria-labelledby="home-title">
+            <p class="home-eyebrow">Tecnologia · conhecimento · curiosidade</p>
+            <h1 id="home-title">{{ .Title | default site.Title }}</h1>
+            <div class="home-intro">
+              {{ .Content }}
+            </div>
+          </section>
 
-        {{- if gt $paginator.TotalPages 1 -}}
-          {{ partial "components/blog-pager.html" $paginator }}
-        {{- end -}}
+          {{- with $latest }}
+            <section aria-labelledby="featured-title">
+              <div class="home-section-heading">
+                <div>
+                  <p class="home-section-kicker">Leitura em destaque</p>
+                  <h2 id="featured-title">O mais recente</h2>
+                </div>
+                <span class="home-article-meta">{{ partial "utils/format-date" .Date }}</span>
+              </div>
+              <article class="home-feature">
+                <div>
+                  <span class="home-feature-label">✦ Artigo mais recente</span>
+                  <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+                  <p class="home-feature-description">{{ partial "utils/page-description" . }}</p>
+                  {{- if site.Params.blog.list.displayTags }}
+                    <div class="home-tags hx:text-sm">
+                      {{ partial "tags.html" (dict "context" .) }}
+                    </div>
+                  {{- end }}
+                  <p class="home-feature-meta">{{ partial "utils/format-date" .Date }}</p>
+                  <a class="home-read-link" href="{{ .RelPermalink }}" aria-label="{{ printf "%s %s" $readMore .Title }}">{{ $readMore }}</a>
+                </div>
+                <aside class="home-feature-aside" aria-label="Sobre esta publicação">
+                  <span class="home-feature-aside-mark" aria-hidden="true">01</span>
+                  <p>Uma nova leitura para acompanhar ideias, experiências e descobertas no universo da tecnologia.</p>
+                </aside>
+              </article>
+            </section>
+          {{- end }}
+
+          <section aria-labelledby="categories-title">
+            <div class="home-section-heading">
+              <div>
+                <p class="home-section-kicker">Explore o diário</p>
+                <h2 id="categories-title">Por onde começar</h2>
+              </div>
+            </div>
+            <div class="home-category-grid">
+              {{- $categories := slice
+                (dict "name" "Linux" "slug" "linux" "symbol" "$_" "description" "Sistemas e ferramentas")
+                (dict "name" "Programação" "slug" "programação" "symbol" "</>" "description" "Linguagens e código")
+                (dict "name" "Segurança" "slug" "segurança" "symbol" "◇" "description" "Proteção e privacidade")
+                (dict "name" "Código aberto" "slug" "código-aberto" "symbol" "{ }" "description" "Software e comunidade")
+              -}}
+              {{- range $categories }}
+                {{- $term := site.GetPage (printf "/categories/%s" .slug) -}}
+                {{- with $term }}
+                  <a class="home-category" href="{{ .RelPermalink }}">
+                    <span class="home-category-symbol" aria-hidden="true">{{ $.symbol }}</span>
+                    <span>
+                      <span class="home-category-name">{{ $.name }}</span><br />
+                      <span class="home-category-count">{{ len .Pages }} publicação(ões)</span>
+                    </span>
+                  </a>
+                {{- end }}
+              {{- end }}
+            </div>
+          </section>
+
+          {{- if gt (len $pages) 1 }}
+            <section aria-labelledby="recent-title">
+              <div class="home-section-heading">
+                <div>
+                  <p class="home-section-kicker">Continue explorando</p>
+                  <h2 id="recent-title">Publicações recentes</h2>
+                </div>
+              </div>
+              <div class="home-article-list">
+                {{- range $paginator.Pages }}
+                  <article class="home-article">
+                    <p class="home-article-meta">{{ partial "utils/format-date" .Date }}</p>
+                    <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+                    {{- if site.Params.blog.list.displayTags }}
+                      <div class="home-tags hx:text-sm">
+                        {{ partial "tags.html" (dict "context" .) }}
+                      </div>
+                    {{- end }}
+                    <p class="home-article-description">{{ partial "utils/page-description" . }}</p>
+                    <a class="home-read-link" href="{{ .RelPermalink }}" aria-label="{{ printf "%s %s" $readMore .Title }}">{{ $readMore }}</a>
+                  </article>
+                {{- end }}
+              </div>
+              {{- if gt $paginator.TotalPages 1 }}
+                <div class="home-pagination">
+                  {{ partial "components/blog-pager.html" $paginator }}
+                </div>
+              {{- end }}
+            </section>
+          {{- end }}
+        </div>
       </main>
     </article>
     <div class="hx:max-xl:hidden hx:h-0 hx:w-64 hx:shrink-0"></div>
