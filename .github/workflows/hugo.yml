@@ -4,6 +4,9 @@ on:
   push:
     branches: ["main"]
   workflow_dispatch:
+  schedule:
+    # Reconstrói o site em 2 de novembro, à meia-noite no horário de Brasília (UTC-3).
+    - cron: "5 3 2 11 *"
 
 permissions:
   contents: read
