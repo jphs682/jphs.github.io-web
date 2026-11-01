@@ -420,28 +420,28 @@
 }
 
 /* Índices de categorias e tags */
-#content .content + .hx\\:grid {
+#content .content + [class*="hx:grid"] {
   gap: .85rem;
 }
-#content .content + .hx\\:grid > div {
+#content .content + [class*="hx:grid"] > div {
   padding: 1rem 1.1rem;
   border: 1px solid var(--editorial-line);
   border-radius: .75rem;
   background: var(--editorial-paper);
   transition: border-color .18s ease, background .18s ease;
 }
-#content .content + .hx\\:grid > div:hover {
+#content .content + [class*="hx:grid"] > div:hover {
   border-color: var(--editorial-accent);
   background: var(--editorial-panel);
 }
-#content .content + .hx\\:grid a {
+#content .content + [class*="hx:grid"] a {
   color: var(--editorial-ink);
   text-decoration: none;
 }
-#content .content + .hx\\:grid a:hover {
+#content .content + [class*="hx:grid"] a:hover {
   color: var(--editorial-accent);
 }
-#content .content + .hx\\:grid span {
+#content .content + [class*="hx:grid"] span {
   color: var(--editorial-muted);
 }
 
@@ -469,10 +469,33 @@
 }
 @media (prefers-reduced-motion: reduce) {
   #content > [class~="hx:mb-10"],
-  #content .content + .hx\\:grid > div {
+  #content .content + [class*="hx:grid"] > div {
     transition: none;
   }
   #content > [class~="hx:mb-10"]:hover {
     transform: none;
   }
+}
+
+
+/* Cabeçalhos de artigos individuais e títulos de seções */
+#content > div > h1,
+#content > div > div > h1 {
+  color: var(--editorial-ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 4.2vw, 3.15rem);
+  font-weight: 650;
+  letter-spacing: -.04em;
+  line-height: 1.12;
+}
+#content > div > div[class*="hx:flex"] > h1 {
+  flex: 1 1 auto;
+}
+#content > div > div[class*="hx:mt-4"][class*="hx:mb-16"] {
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid var(--editorial-line);
+}
+#content .content + [class*="hx:grid"] {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
 }
