@@ -241,3 +241,238 @@
   .home-editorial .home-category,
   .home-editorial .home-article { transition: none; }
 }
+
+
+/* --------------------------------------------------------------------------
+   Sistema visual editorial global — artigos, listas, categorias e páginas
+   -------------------------------------------------------------------------- */
+:root {
+  --editorial-accent: #176b72;
+  --editorial-ink: #202b33;
+  --editorial-muted: #66737c;
+  --editorial-line: #e4e9eb;
+  --editorial-paper: #ffffff;
+  --editorial-panel: #f6f8f8;
+}
+.dark {
+  --editorial-accent: #83c9c8;
+  --editorial-ink: #e8eeee;
+  --editorial-muted: #a8b6ba;
+  --editorial-line: #344347;
+  --editorial-paper: #172326;
+  --editorial-panel: #1d2b2f;
+}
+
+/* Largura, ritmo e títulos das páginas internas */
+#content {
+  color: var(--editorial-ink);
+}
+#content > h1,
+#content .content > h1,
+#content .content h1 {
+  color: var(--editorial-ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 4.2vw, 3.15rem);
+  font-weight: 650;
+  letter-spacing: -.04em;
+  line-height: 1.12;
+}
+#content .content {
+  color: var(--editorial-ink);
+  font-size: 1rem;
+  line-height: 1.85;
+}
+#content .content > p {
+  margin-block: 1.05rem;
+}
+#content .content h2,
+#content .content h3,
+#content .content h4 {
+  color: var(--editorial-ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 650;
+  letter-spacing: -.025em;
+  line-height: 1.25;
+}
+#content .content h2 {
+  margin-top: 2.8rem;
+  margin-bottom: 1rem;
+  padding-bottom: .55rem;
+  border-bottom: 1px solid var(--editorial-line);
+  font-size: clamp(1.55rem, 3vw, 2rem);
+}
+#content .content h3 {
+  margin-top: 2rem;
+  margin-bottom: .75rem;
+  font-size: clamp(1.25rem, 2.5vw, 1.55rem);
+}
+#content .content h4 {
+  margin-top: 1.5rem;
+  font-size: 1.12rem;
+}
+#content .content a {
+  color: var(--editorial-accent);
+  text-decoration-color: color-mix(in srgb, var(--editorial-accent) 45%, transparent);
+  text-underline-offset: 3px;
+}
+#content .content a:hover {
+  text-decoration-thickness: 2px;
+}
+#content .content strong {
+  color: var(--editorial-ink);
+  font-weight: 700;
+}
+#content .content blockquote {
+  margin: 1.8rem 0;
+  padding: 1rem 1.35rem;
+  border: 1px solid var(--editorial-line);
+  border-left: 4px solid var(--editorial-accent);
+  border-radius: 0 .8rem .8rem 0;
+  background: var(--editorial-panel);
+  color: var(--editorial-muted);
+}
+#content .content blockquote p:first-child { margin-top: 0; }
+#content .content blockquote p:last-child { margin-bottom: 0; }
+#content .content ul,
+#content .content ol {
+  padding-left: 1.5rem;
+}
+#content .content li {
+  margin-block: .35rem;
+  padding-left: .15rem;
+}
+#content .content hr {
+  margin: 2.5rem 0;
+  border-color: var(--editorial-line);
+}
+#content .content img {
+  border: 1px solid var(--editorial-line);
+  border-radius: .9rem;
+}
+#content .content pre {
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  border: 1px solid var(--editorial-line);
+  border-radius: .9rem;
+  box-shadow: 0 8px 24px rgb(20 40 45 / 5%);
+}
+#content .content :not(pre) > code {
+  padding: .15rem .4rem;
+  border: 1px solid var(--editorial-line);
+  border-radius: .35rem;
+  background: var(--editorial-panel);
+  color: var(--editorial-accent);
+  font-size: .88em;
+}
+#content .content table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  border: 1px solid var(--editorial-line);
+  border-radius: .7rem;
+}
+#content .content th {
+  background: var(--editorial-panel);
+  color: var(--editorial-ink);
+  font-weight: 700;
+}
+#content .content th,
+#content .content td {
+  padding: .75rem .9rem;
+  border: 1px solid var(--editorial-line);
+  text-align: left;
+}
+#content .content tr:nth-child(even) td {
+  background: color-mix(in srgb, var(--editorial-panel) 55%, transparent);
+}
+
+/* Arquivo de publicações e páginas de listagem */
+#content > [class~="hx:mb-10"] {
+  margin: 1rem 0;
+  padding: 1.35rem 1.45rem;
+  border: 1px solid var(--editorial-line);
+  border-radius: .9rem;
+  background: var(--editorial-paper);
+  transition: border-color .18s ease, transform .18s ease;
+}
+#content > [class~="hx:mb-10"]:hover {
+  transform: translateY(-2px);
+  border-color: var(--editorial-accent);
+}
+#content > [class~="hx:mb-10"] h3 {
+  margin-top: 0;
+}
+#content > [class~="hx:mb-10"] h3 a {
+  color: var(--editorial-ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.3rem, 2.5vw, 1.65rem);
+  font-weight: 650;
+  letter-spacing: -.025em;
+  text-decoration: none;
+}
+#content > [class~="hx:mb-10"] h3 a:hover {
+  color: var(--editorial-accent);
+}
+#content > [class~="hx:mb-10"] p {
+  color: var(--editorial-muted);
+  line-height: 1.75;
+}
+
+/* Índices de categorias e tags */
+#content .content + .hx\\:grid {
+  gap: .85rem;
+}
+#content .content + .hx\\:grid > div {
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--editorial-line);
+  border-radius: .75rem;
+  background: var(--editorial-paper);
+  transition: border-color .18s ease, background .18s ease;
+}
+#content .content + .hx\\:grid > div:hover {
+  border-color: var(--editorial-accent);
+  background: var(--editorial-panel);
+}
+#content .content + .hx\\:grid a {
+  color: var(--editorial-ink);
+  text-decoration: none;
+}
+#content .content + .hx\\:grid a:hover {
+  color: var(--editorial-accent);
+}
+#content .content + .hx\\:grid span {
+  color: var(--editorial-muted);
+}
+
+/* Navegação contextual e metadados */
+#content nav a,
+#content [class*="text-gray-500"] {
+  text-decoration-color: var(--editorial-line);
+}
+#content [class*="hx:mt-4"][class*="hx:mb-16"] {
+  color: var(--editorial-muted);
+}
+
+/* Ajustes de leitura em telas menores */
+@media (max-width: 640px) {
+  #content .content {
+    font-size: .97rem;
+    line-height: 1.8;
+  }
+  #content > [class~="hx:mb-10"] {
+    padding: 1.1rem;
+  }
+  #content .content pre {
+    border-radius: .65rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #content > [class~="hx:mb-10"],
+  #content .content + .hx\\:grid > div {
+    transition: none;
+  }
+  #content > [class~="hx:mb-10"]:hover {
+    transform: none;
+  }
+}
