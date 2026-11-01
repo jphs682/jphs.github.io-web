@@ -4,6 +4,11 @@ title: "Diário de um Computador"
 
 defaultContentLanguage: "pt-br"
 enableEmoji: true
+enableRobotsTXT: true
+
+sitemap:
+  filename: sitemap.xml
+  changefreq: weekly
 
 languages:
   pt-br:
