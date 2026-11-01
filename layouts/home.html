@@ -74,7 +74,7 @@
               -}}
               {{- range $categories }}
                 {{- $category := . -}}
-                {{- $term := site.GetPage (printf "/categories/%s" $category.slug) -}}
+                {{- $term := site.GetPage (printf "/categories/%s" (urlize $category.slug)) -}}
                 {{- with $term }}
                   <a class="home-category" href="{{ .RelPermalink }}">
                     <span class="home-category-symbol" aria-hidden="true">{{ $category.symbol }}</span>
