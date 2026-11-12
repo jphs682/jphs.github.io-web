@@ -532,7 +532,7 @@
 .reading-progress {
   position: fixed;
   z-index: 60;
-  inset: 0 0 auto;
+  inset: var(--navbar-height, 4rem) 0 auto;
   height: 3px;
   overflow: hidden;
   pointer-events: none;
