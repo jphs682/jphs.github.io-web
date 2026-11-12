@@ -18,5 +18,18 @@
   </span>
 </div>
 
+<div class="reading-toolbar" role="group" aria-label="Controles de leitura">
+  <div class="reading-toolbar__group" role="group" aria-label="Tamanho do texto">
+    <span class="reading-toolbar__label">Texto</span>
+    <button type="button" class="reading-control" data-font-size="small" aria-label="Diminuir tamanho do texto" aria-pressed="false">A−</button>
+    <button type="button" class="reading-control" data-font-size="normal" aria-label="Tamanho padrão do texto" aria-pressed="true">A</button>
+    <button type="button" class="reading-control" data-font-size="large" aria-label="Aumentar tamanho do texto" aria-pressed="false">A+</button>
+  </div>
+  <button type="button" class="reading-control reading-control--share" data-share-article>
+    <span aria-hidden="true">↗</span> Compartilhar
+  </button>
+  <span class="reading-toolbar__status" data-reading-status role="status" aria-live="polite"></span>
+</div>
+
 <div class="reading-article-content" data-reading-content>
 {{- end }}
