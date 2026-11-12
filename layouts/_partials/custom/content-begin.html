@@ -1,0 +1,22 @@
+{{- if and .IsPage (eq .Section "blog") }}
+<div
+  class="reading-progress"
+  data-reading-progress
+  role="progressbar"
+  aria-label="Progresso da leitura"
+  aria-valuemin="0"
+  aria-valuemax="100"
+  aria-valuenow="0"
+>
+  <span class="reading-progress__bar" data-reading-progress-bar></span>
+</div>
+
+<div class="reading-meta">
+  <span class="reading-meta__item">
+    <span aria-hidden="true">◷</span>
+    {{ .ReadingTime }} min de leitura
+  </span>
+</div>
+
+<div class="reading-article-content" data-reading-content>
+{{- end }}
