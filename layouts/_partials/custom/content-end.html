@@ -1,0 +1,39 @@
+{{- if and .IsPage (eq .Section "blog") }}
+</div>
+
+{{- $related := where (site.RegularPages.Related .) "Section" "blog" -}}
+{{- if eq (len $related) 0 -}}
+  {{- $related = where (where site.RegularPages "Section" "blog") "Permalink" "ne" .Permalink -}}
+  {{- $related = first 3 ($related.ByDate.Reverse) -}}
+{{- else -}}
+  {{- $related = first 3 $related -}}
+{{- end -}}
+
+{{- if gt (len $related) 0 }}
+<section class="reading-related" aria-labelledby="reading-related-title">
+  <div class="reading-related__heading">
+    <p class="reading-related__eyebrow">Continue explorando</p>
+    <h2 id="reading-related-title">Mais leituras do diário</h2>
+  </div>
+
+  <div class="reading-related__grid">
+    {{- range $related }}
+      <article class="reading-related__card">
+        <p class="reading-related__date">{{ partial "utils/format-date" .Date }}</p>
+        <h3><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h3>
+        <p class="reading-related__description">
+          {{- with .Description -}}
+            {{ . }}
+          {{- else -}}
+            {{ .Summary | plainify | truncate 150 }}
+          {{- end -}}
+        </p>
+        <a class="reading-related__link" href="{{ .RelPermalink }}" aria-label="{{ printf "Ler artigo: %s" .LinkTitle }}">
+          Ler artigo <span aria-hidden="true">→</span>
+        </a>
+      </article>
+    {{- end }}
+  </div>
+</section>
+{{- end }}
+{{- end }}

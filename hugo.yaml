@@ -111,3 +111,15 @@ params:
       sortOrder: desc
       pagerSize: 10
       displayTags: true
+
+
+# Recomendações de leitura relacionadas aos artigos do blog.
+related:
+  threshold: 30
+  includeNewer: true
+  toLower: true
+  indices:
+    - name: categories
+      weight: 100
+    - name: tags
+      weight: 80
