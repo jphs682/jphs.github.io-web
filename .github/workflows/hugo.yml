@@ -27,6 +27,7 @@ jobs:
 
     env:
       HUGO_VERSION: 0.165.0
+      DART_SASS_VERSION: 1.105.1
 
     steps:
       - name: Checkout
@@ -42,7 +43,18 @@ jobs:
           sudo dpkg -i "${{ runner.temp }}/hugo.deb"
 
       - name: Install Dart Sass
-        run: sudo snap install dart-sass
+        run: |
+          archive="${RUNNER_TEMP}/dart-sass.tar.gz"
+          install_dir="${RUNNER_TEMP}/dart-sass"
+          url="https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz"
+
+          curl --fail --show-error --location \
+            --retry 5 --retry-all-errors --retry-delay 2 \
+            "${url}" --output "${archive}"
+          mkdir -p "${install_dir}"
+          tar -xzf "${archive}" --strip-components=1 -C "${install_dir}"
+          echo "${install_dir}" >> "${GITHUB_PATH}"
+          "${install_dir}/sass" --version
 
       - name: Set up Python
         uses: actions/setup-python@v6.0.0
