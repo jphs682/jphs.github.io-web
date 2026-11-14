@@ -58,35 +58,30 @@
             </section>
           {{- end }}
 
-          <section aria-labelledby="categories-title">
-            <div class="home-section-heading">
-              <div>
-                <p class="home-section-kicker">Explore o diário</p>
-                <h2 id="categories-title">Por onde começar</h2>
+          {{- $categories := site.Taxonomies.categories.Alphabetical -}}
+          {{- with $categories }}
+            <section aria-labelledby="categories-title">
+              <div class="home-section-heading">
+                <div>
+                  <p class="home-section-kicker">Explore o diário</p>
+                  <h2 id="categories-title">Por onde começar</h2>
+                </div>
               </div>
-            </div>
-            <div class="home-category-grid">
-              {{- $categories := slice
-                (dict "name" "Linux" "slug" "linux" "symbol" "$_" "description" "Sistemas e ferramentas")
-                (dict "name" "Programação" "slug" "programação" "symbol" "</>" "description" "Linguagens e código")
-                (dict "name" "Segurança" "slug" "segurança" "symbol" "◇" "description" "Proteção e privacidade")
-                (dict "name" "Código aberto" "slug" "código-aberto" "symbol" "{ }" "description" "Software e comunidade")
-              -}}
-              {{- range $categories }}
-                {{- $category := . -}}
-                {{- $term := site.GetPage (printf "/categories/%s" (urlize $category.slug)) -}}
-                {{- with $term }}
-                  <a class="home-category" href="{{ .RelPermalink }}">
-                    <span class="home-category-symbol" aria-hidden="true">{{ $category.symbol }}</span>
-                    <span>
-                      <span class="home-category-name">{{ $category.name }}</span><br />
-                      <span class="home-category-count">{{ len .Pages }} publicação(ões)</span>
-                    </span>
-                  </a>
+              <div class="home-category-grid">
+                {{- range . }}
+                  {{- if gt .Count 0 }}
+                    <a class="home-category" href="{{ .Page.RelPermalink }}">
+                      <span class="home-category-symbol" aria-hidden="true">#</span>
+                      <span>
+                        <span class="home-category-name">{{ .Page.LinkTitle }}</span><br />
+                        <span class="home-category-count">{{ .Count }} {{ if eq .Count 1 }}publicação{{ else }}publicações{{ end }}</span>
+                      </span>
+                    </a>
+                  {{- end }}
                 {{- end }}
-              {{- end }}
-            </div>
-          </section>
+              </div>
+            </section>
+          {{- end }}
 
           {{- if gt (len $pages) 1 }}
             <section aria-labelledby="recent-title">
