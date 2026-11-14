@@ -532,7 +532,7 @@
 .reading-progress {
   position: fixed;
   z-index: 60;
-  inset: var(--navbar-height, 4rem) 0 auto;
+  inset: 0 0 auto;
   height: 3px;
   overflow: hidden;
   pointer-events: none;
@@ -808,6 +808,7 @@ body.reading-mode {
 }
 body.reading-mode .reading-mode-sidebar,
 body.reading-mode .reading-mode-breadcrumb,
+body.reading-mode .reading-meta,
 body.reading-mode [data-reading-hide],
 body.reading-mode .reading-related,
 body.reading-mode .reading-back-to-top,
