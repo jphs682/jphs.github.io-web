@@ -532,7 +532,7 @@
 .reading-progress {
   position: fixed;
   z-index: 60;
-  inset: var(--navbar-height, 4rem) 0 auto;
+  inset: 0 0 auto;
   height: 3px;
   overflow: hidden;
   pointer-events: none;
@@ -797,4 +797,81 @@
   .reading-control,
   .reading-back-to-top { transition: none; }
   .reading-back-to-top { transform: none; }
+}
+
+
+/* --------------------------------------------------------------------------
+   Modo leitura v1 — foco no artigo, sumário e controles essenciais
+   -------------------------------------------------------------------------- */
+body.reading-mode {
+  --reading-mode-width: 48rem;
+}
+body.reading-mode .reading-mode-sidebar,
+body.reading-mode .reading-mode-breadcrumb,
+body.reading-mode .reading-meta,
+body.reading-mode [data-reading-hide],
+body.reading-mode .reading-related,
+body.reading-mode .reading-back-to-top,
+body.reading-mode footer,
+body.reading-mode .hextra-footer,
+body.reading-mode .hextra-nav-container {
+  display: none !important;
+}
+body.reading-mode .reading-progress {
+  display: block;
+}
+body.reading-mode > header,
+body.reading-mode header.hextra-nav-container {
+  display: none !important;
+}
+body.reading-mode article.hextra-max-page-width,
+body.reading-mode article:has(> main#content) {
+  justify-content: center;
+}
+body.reading-mode #content {
+  width: min(100%, var(--reading-mode-width));
+  max-width: var(--reading-mode-width);
+  margin-inline: auto;
+  padding-top: 2rem;
+}
+body.reading-mode #content .content {
+  max-width: 100%;
+  margin-inline: auto;
+  font-size: 1.04rem;
+  line-height: 1.95;
+}
+body.reading-mode #content .reading-article-content {
+  max-width: 100%;
+}
+body.reading-mode #content .reading-toolbar {
+  position: sticky;
+  top: .75rem;
+  z-index: 40;
+  box-shadow: 0 5px 18px rgb(20 40 45 / 8%);
+  backdrop-filter: blur(12px);
+}
+body.reading-mode #content .reading-toolbar__status {
+  flex-basis: auto;
+}
+body.reading-mode #content h1 {
+  max-width: 100%;
+}
+body.reading-mode #TableOfContents,
+body.reading-mode #table-of-contents,
+body.reading-mode .hextra-toc,
+body.reading-mode [data-toc] {
+  display: block;
+}
+@media (max-width: 768px) {
+  body.reading-mode #content {
+    padding-inline: 1.15rem;
+  }
+  body.reading-mode #content .reading-toolbar {
+    top: .35rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.reading-mode * {
+    scroll-behavior: auto !important;
+  }
 }

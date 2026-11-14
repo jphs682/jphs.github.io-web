@@ -43,6 +43,38 @@
   window.addEventListener("resize", scheduleUpdate, { passive: true });
   updateProgress();
 
+  // Modo leitura: reduz distrações sem remover o artigo, o sumário ou os controles.
+  const readingModeButton = document.querySelector("[data-reading-mode-toggle]");
+  const readingModeKey = "diario-computador-reading-mode";
+  const setReadingMode = (enabled, persist = true) => {
+    document.body.classList.toggle("reading-mode", enabled);
+    if (readingModeButton) {
+      readingModeButton.setAttribute("aria-pressed", String(enabled));
+      readingModeButton.innerHTML = enabled
+        ? '<span aria-hidden="true">×</span> Sair do modo leitura'
+        : '<span aria-hidden="true">◫</span> Modo leitura';
+      readingModeButton.setAttribute("aria-label", enabled ? "Sair do modo leitura" : "Ativar modo leitura");
+    }
+    if (persist) {
+      try { window.localStorage.setItem(readingModeKey, enabled ? "on" : "off"); } catch (_) { /* armazenamento opcional */ }
+    }
+  };
+
+  let savedReadingMode = false;
+  try { savedReadingMode = window.localStorage.getItem(readingModeKey) === "on"; } catch (_) { /* armazenamento opcional */ }
+  setReadingMode(savedReadingMode, false);
+  if (readingModeButton) {
+    readingModeButton.addEventListener("click", () => {
+      setReadingMode(!document.body.classList.contains("reading-mode"));
+    });
+  }
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && document.body.classList.contains("reading-mode")) {
+      setReadingMode(false);
+      if (readingModeButton) readingModeButton.focus();
+    }
+  });
+
   // Preferências tipográficas locais, sem conta ou serviço externo.
   const fontControls = [...document.querySelectorAll("[data-font-size]")];
   const fontScales = { small: "0.94", normal: "1", large: "1.14" };
