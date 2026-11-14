@@ -1,4 +1,4 @@
-LICENÇA DO CONTEÚDO EDITORIAL
+AVISO DE LICENÇA DO CONTEÚDO EDITORIAL — NÃO É LICENÇA DO CÓDIGO-FONTE
 
 Salvo indicação em contrário, os textos e as imagens originais publicados no site
 “Diário de um Computador” estão licenciados sob a Creative Commons Atribuição
@@ -17,7 +17,8 @@ https://creativecommons.org/licenses/by/4.0/legalcode
 IMPORTANTE: Esta licença cobre apenas os textos e as imagens originais do site,
 salvo indicação diferente em uma publicação. Ela NÃO licencia o código-fonte
 do site, o tema Hextra, dependências, marcas, logotipos nem materiais de terceiros.
-Esses elementos permanecem sujeitos às respectivas licenças e direitos.
+Esses elementos permanecem sujeitos às respectivas licenças e direitos. O código
+deste repositório não possui uma licença de reutilização declarada por este aviso.
 
 Mais informações:
 https://jphs682.github.io/jphs.github.io-web/licenca/
