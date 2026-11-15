@@ -25,7 +25,10 @@
     <button type="button" class="reading-control" data-font-size="normal" aria-label="Tamanho padrão do texto" aria-pressed="true">A</button>
     <button type="button" class="reading-control" data-font-size="large" aria-label="Aumentar tamanho do texto" aria-pressed="false">A+</button>
   </div>
-  <button type="button" class="reading-control reading-control--share" data-share-article>
+  <button type="button" class="reading-control reading-control--mode" data-reading-mode-toggle aria-pressed="false">
+    <span aria-hidden="true">◫</span> Modo leitura
+  </button>
+  <button type="button" class="reading-control reading-control--share" data-share-article data-reading-hide>
     <span aria-hidden="true">↗</span> Compartilhar
   </button>
   <span class="reading-toolbar__status" data-reading-status role="status" aria-live="polite"></span>
