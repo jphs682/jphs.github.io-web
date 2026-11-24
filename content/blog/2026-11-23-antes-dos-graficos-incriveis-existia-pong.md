@@ -1,6 +1,6 @@
 ---
 title: "Antes dos gráficos incríveis, existia Pong: o que esse jogo tem a ver com Linux?"
-date: "2026-11-23T15:00:00-03:00"
+date: "2026-11-23T12:00:00-03:00"
 description: "Do clássico Pong aos jogos de código aberto: descubra como um jogo simples se conecta à história dos videogames, ao Linux e ao aprendizado de programação."
 categories:
   - tecnologia
